@@ -1,5 +1,7 @@
-const userIcon = () => {
-  return <div>userIcon</div>;
+import { LuUserRound } from "react-icons/lu";
+
+const UserIcon = () => {
+  return <LuUserRound className="text-xl" />;
 };
 
-export default userIcon;
+export default UserIcon;
