@@ -7,7 +7,7 @@ import { IoIosMoon } from 'react-icons/io';
 
 const DarkModeIcons = ({ setDropOpen }: { setDropOpen: Dispatch<SetStateAction<boolean>> }) => {
   const dark = useSelector((state: RootState) => state.theme.dark);
-  if (dark) return <IoSunnyOutline onClick={() => setDropOpen(true)} className='text-xl' />;
+  if (!dark) return <IoSunnyOutline onClick={() => setDropOpen(true)} className='text-xl' />;
   return <IoIosMoon onClick={() => setDropOpen(true)} className='text-xl' />;
 };
 
