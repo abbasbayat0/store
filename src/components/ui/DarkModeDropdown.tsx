@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 const DarkModeDropdown = ({ setDropOpen }: { setDropOpen: Dispatch<SetStateAction<boolean>> }) => {
   const dispatch = useDispatch();
   return (
-    <div className='absolute right-0 -bottom-[80px] flex w-24 flex-col items-start justify-around rounded-md bg-white px-2 py-2 shadow-md shadow-gray-300'>
+    <div className='absolute right-0 -bottom-[80px] flex w-28 flex-col items-start justify-around rounded-md bg-white px-2 py-2 shadow-md shadow-gray-300'>
       <p
         onClick={() => {
           dispatch(changeTheme(false));
