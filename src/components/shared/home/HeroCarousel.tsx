@@ -14,7 +14,7 @@ const HeroCarousel = () => {
     setActive(newActive);
   };
   return (
-    <div className='relative h-96 w-1/2'>
+    <div className='relative h-96 w-1/2 hidden lg:flex'>
       <div className='flex h-96 w-full items-center justify-center'>
         {list.map((item) => {
           const isThisActive = item === active;
