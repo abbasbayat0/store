@@ -1,6 +1,6 @@
 import { FaHeart } from 'react-icons/fa';
 
-const FavoriteToggleButton = () => {
+const FavoriteToggleButton = ({id}:{id:number}) => {
   return (
     <div>
       <FaHeart />

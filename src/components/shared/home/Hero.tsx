@@ -2,6 +2,7 @@
 import { useSelector } from 'react-redux';
 import HeroCarousel from './HeroCarousel';
 import { RootState } from '@/lib/store/store';
+import Link from 'next/link';
 
 const Hero = () => {
   const dark = useSelector((state: RootState) => state.theme.dark);
@@ -18,11 +19,13 @@ const Hero = () => {
           voluptate, laborum maiores possimus illum reprehenderit aut delectus veniam cum
           perferendis unde sint doloremque non nam.
         </p>
-        <button
-          className={`mt-10 ${dark && 'text-black'} rounded-md bg-blue-600 px-8 py-3 text-xs font-medium text-white opacity-90 transition duration-300`}
-        >
-          OUR PRODUCTS
-        </button>
+        <Link href='/products' className='cursor-pointer'>
+          <button
+            className={`mt-10 ${dark && 'text-black'} rounded-md bg-blue-600 px-8 py-3 text-xs font-medium text-white opacity-90 transition duration-300`}
+          >
+            OUR PRODUCTS
+          </button>
+        </Link>
       </div>
       <HeroCarousel />
     </div>

@@ -9,7 +9,7 @@ const FeaturedProducts = async () => {
   return (
     <section className='pt-24'>
       <SectionTitle title='featured products' />
-      {/* <ProductsGrid products={products} /> */}
+      <ProductsGrid products={featuredProducts} />
     </section>
   );
 };
