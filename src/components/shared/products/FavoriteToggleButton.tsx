@@ -1,5 +1,11 @@
+import { FaHeart } from 'react-icons/fa';
+
 const FavoriteToggleButton = () => {
-  return <div>FavoriteToggleButton</div>;
+  return (
+    <div>
+      <FaHeart />
+    </div>
+  );
 };
 
 export default FavoriteToggleButton;
