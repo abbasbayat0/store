@@ -1,8 +1,21 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 import { useState } from 'react';
+import { GrFormPreviousLink } from 'react-icons/gr';
+import { GrFormNextLink } from 'react-icons/gr';
+import one from '@/assets/images/1.webp';
+import two from '@/assets/images/2.webp';
+import three from '@/assets/images/3.webp';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/lib/store/store';
 
 const HeroCarousel = () => {
-  const list = [0, 1, 2];
+  const list = [
+    { src: one, index: 0 },
+    { src: two, index: 1 },
+    { src: three, index: 2 },
+  ];
+  const dark = useSelector((state: RootState) => state.theme.dark);
   const [active, setActive] = useState(0);
   const situation = active === 0 ? 'first' : active === list.length - 1 ? 'last' : '';
   // const handlePrev = () => {
@@ -14,34 +27,40 @@ const HeroCarousel = () => {
   //   setActive(newActive);
   // };
   return (
-    <div className='relative hidden h-96 w-1/2 lg:flex'>
-      <div className='flex h-96 w-full items-center justify-center bg-red-300'>
+    <div className='relative hidden h-[400px] w-[600px] flex-col items-center justify-center overflow-hidden lg:flex'>
+      <div className='flex h-96 w-full items-center justify-center'>
         {list.map((item) => {
-          const goLeft = item < active;
-          const goRight = item > active;
+          const goLeft = item.index < active;
+          const goRight = item.index > active;
           return (
-            <div key={item} className='flex items-center justify-center'>
+            <div key={item.index} className='flex items-center justify-center'>
               <div
-                className={`absolute flex h-11/12 min-w-11/12 items-center justify-center bg-green-300 ${goRight && 'left-[110%]'} ${goLeft && '-left-[110%]'} ${!goLeft && !goRight && 'left-5'} transition-all duration-1000 ease-out`}
+                className={`absolute flex h-11/12 min-w-11/12 items-center justify-center rounded-md border border-gray-300 ${goRight && 'left-[120%]'} ${goLeft && '-left-[120%]'} ${!goLeft && !goRight && 'left-[25px]'} transition-all duration-700 ease-out ${dark && 'border-gray-700'}`}
               >
-                {item}
+                <img
+                  src={item.src.src}
+                  alt='item.index'
+                  className='h-[97%] w-[98%] rounded-md object-cover'
+                />
               </div>
             </div>
           );
         })}
+      </div>
+      <div className='absolute flex w-full items-center justify-between'>
         <button
           disabled={situation === 'first'}
-          className={`absolute left-0 cursor-pointer disabled:opacity-40`}
+          className={`cursor-pointer rounded-full border border-gray-300 bg-[#e5e7eb88] p-1 text-xl disabled:cursor-not-allowed disabled:opacity-40 ${dark && 'border-gray-700 bg-gray-800 text-gray-300'} transition duration-300`}
           onClick={() => setActive(active - 1)}
         >
-          prev
+          <GrFormPreviousLink />
         </button>
         <button
           disabled={situation === 'last'}
-          className={`cursor-pointe absolute right-0 disabled:opacity-40`}
+          className={`cursor-pointer rounded-full border border-gray-300 bg-[#e5e7eb88] p-1 text-xl disabled:cursor-not-allowed disabled:opacity-40 ${dark && 'border-gray-700 bg-gray-800 text-gray-300'} transition duration-300`}
           onClick={() => setActive(active + 1)}
         >
-          next
+          <GrFormNextLink />
         </button>
       </div>
     </div>
