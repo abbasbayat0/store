@@ -27,22 +27,21 @@ const HeroCarousel = () => {
   //   setActive(newActive);
   // };
   return (
-    <div className='relative hidden h-[400px] w-[600px] flex-col items-center justify-center overflow-hidden lg:flex'>
+    <div className='relative hidden h-[450px] w-[650px] flex-col items-center justify-center overflow-hidden lg:flex'>
       <div className='flex h-96 w-full items-center justify-center'>
         {list.map((item) => {
           const goLeft = item.index < active;
           const goRight = item.index > active;
           return (
-            <div key={item.index} className='flex items-center justify-center'>
-              <div
-                className={`absolute flex h-11/12 min-w-11/12 items-center justify-center rounded-md border border-gray-300 ${goRight && 'left-[120%]'} ${goLeft && '-left-[120%]'} ${!goLeft && !goRight && 'left-[25px]'} transition-all duration-700 ease-out ${dark && 'border-gray-700'}`}
-              >
-                <img
-                  src={item.src.src}
-                  alt='item.index'
-                  className='h-[97%] w-[98%] rounded-md object-cover'
-                />
-              </div>
+            <div
+              key={item.index}
+              className={`absolute flex h-11/12 w-11/12 items-center justify-center rounded-md border border-gray-300 ${goRight && 'left-[130%]'} ${goLeft && '-left-[130%]'} ${!goLeft && !goRight && 'left-7'} transition-all duration-700 ease-out ${dark && 'border-gray-700'}`}
+            >
+              <img
+                src={item.src.src}
+                alt='item.index'
+                className='h-[97%] w-[98%] rounded-md object-cover'
+              />
             </div>
           );
         })}
