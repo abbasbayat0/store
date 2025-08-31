@@ -21,7 +21,7 @@ const Hero = () => {
         </p>
         <Link href='/products' className='cursor-pointer'>
           <button
-            className={`mt-10 ${dark && 'text-black'} rounded-md bg-blue-600 px-8 py-3 text-xs font-medium text-white opacity-90 transition duration-300`}
+            className={`mt-10 ${dark && 'text-black'} cursor-pointer rounded-md bg-blue-600 px-8 py-3 text-xs font-medium text-white opacity-90 transition duration-300`}
           >
             OUR PRODUCTS
           </button>
