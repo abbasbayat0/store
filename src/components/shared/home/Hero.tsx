@@ -14,7 +14,7 @@ const Hero = () => {
         >
           We are changing the way people shop
         </h1>
-        <p className={`mt-10 text-xl opacity-60 ${dark && 'text-white'} transition duration-300`}>
+        <p className={`text-xl opacity-60 ${dark && 'text-white'} mt-10 transition duration-300`}>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque et voluptas saepe in quae
           voluptate, laborum maiores possimus illum reprehenderit aut delectus veniam cum
           perferendis unde sint doloremque non nam.
