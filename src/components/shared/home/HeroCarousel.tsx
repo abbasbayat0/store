@@ -35,12 +35,12 @@ const HeroCarousel = () => {
           return (
             <div
               key={item.index}
-              className={`absolute flex h-11/12 w-11/12 items-center justify-center rounded-md border border-gray-300 ${goRight && 'left-[130%]'} ${goLeft && '-left-[130%]'} ${!goLeft && !goRight && 'left-7'} transition-all duration-700 ease-out ${dark && 'border-gray-700'}`}
+              className={`absolute flex h-11/12 w-11/12 items-center justify-center rounded-md border border-gray-300 lg:rounded-xl ${goRight && 'left-[130%]'} ${goLeft && '-left-[130%]'} ${!goLeft && !goRight && 'left-7'} transition-all duration-700 ease-out ${dark && 'border-gray-700'}`}
             >
               <img
                 src={item.src.src}
                 alt='item.index'
-                className='h-[97%] w-[98%] rounded-md object-cover'
+                className='h-[97%] w-[98%] rounded-md object-cover lg:rounded-lg'
               />
             </div>
           );

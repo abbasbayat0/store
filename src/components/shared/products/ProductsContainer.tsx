@@ -1,5 +1,34 @@
-const ProductsContainer = () => {
-  return <div>ProductsContainer</div>;
+import ProductsLayoutIcons from '@/components/ui/ProductsLayoutIcons';
+import { getAll } from '@/lib/utils/actions';
+import ProductsGrid from './ProductsGrid';
+import ProductsList from './ProductsList';
+import NoMatchedProducts from '@/components/ui/NoMatchedProducts';
+
+const ProductsContainer = async ({ layout, search }: { layout: string; search: string }) => {
+  const products = await getAll();
+  const searchTerms = search ? `&${search}` : '';
+  const productsLength = products.length;
+  const title = productsLength === 0 ? `no product found !` : `${productsLength} products`;
+  return (
+    <>
+      <div className='flex flex-col gap-5'>
+        <div className='flex items-center justify-between'>
+          <p className='text-lg font-semibold'>{title}</p>
+          <ProductsLayoutIcons layout={layout} />
+        </div>
+        <div className='w-full border-b border-gray-300'></div>
+      </div>
+      <div>
+        {productsLength === 0 ? (
+          <NoMatchedProducts />
+        ) : layout === 'grid' ? (
+          <ProductsGrid products={products} />
+        ) : (
+          <ProductsList products={products} />
+        )}
+      </div>
+    </>
+  );
 };
 
 export default ProductsContainer;

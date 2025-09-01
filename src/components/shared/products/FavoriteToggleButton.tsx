@@ -7,7 +7,7 @@ const FavoriteToggleButton = ({ id }: { id: string }) => {
   const dark = useSelector((state: RootState) => state.theme.dark);
   return (
     <div
-      className={`absolute top-7 right-7 z-10 flex h-8 w-8 cursor-pointer items-center justify-center rounded-md p-1 transition duration-300 ${dark ? 'bg-gray-800 text-white hover:bg-gray-700' : 'bg-white text-black hover:bg-gray-200'}`}
+      className={`z-10 flex h-8 w-8 cursor-pointer items-center justify-center rounded-md p-1 transition duration-300 ${dark ? 'bg-gray-800 text-white hover:bg-gray-700' : 'bg-gray-100 text-black hover:bg-gray-200'}`}
     >
       <CiHeart className='text-3xl' />
     </div>

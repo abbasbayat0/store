@@ -2,6 +2,8 @@ import { getFeatured } from '@/lib/utils/actions';
 import EmptyList from '../global/EmptyList';
 import SectionTitle from '../global/SectionTitle';
 import ProductsGrid from '../products/ProductsGrid';
+import { Suspense } from 'react';
+import LoadingContainer from '../global/LoadingContainer';
 
 const FeaturedProducts = async () => {
   const featuredProducts = await getFeatured();
@@ -9,7 +11,9 @@ const FeaturedProducts = async () => {
   return (
     <section className='pt-24'>
       <SectionTitle title='featured products' />
-      <ProductsGrid products={featuredProducts} />
+      <Suspense fallback={<LoadingContainer />}>
+        <ProductsGrid products={featuredProducts} />
+      </Suspense>
     </section>
   );
 };

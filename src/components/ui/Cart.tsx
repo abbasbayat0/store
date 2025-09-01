@@ -12,7 +12,7 @@ const Cart = ({ id, name, image, price }: Product) => {
     <div className='relative'>
       <Link
         href={`/products/${id}`}
-        className={`group flex w-66 flex-col items-center justify-center rounded-md border border-gray-300 p-5 shadow-md transition duration-300 hover:shadow-lg lg:w-72 xl:w-[370px] ${dark && 'border-gray-800'}`}
+        className={`group flex w-66 flex-col items-center justify-center rounded-md border border-gray-300 p-5 shadow-md transition duration-300 hover:shadow-lg lg:w-72 lg:rounded-xl xl:w-[370px] ${dark && 'border-gray-800'}`}
       >
         <div className='mx-auto flex h-52 w-full overflow-hidden rounded-md'>
           <img
@@ -24,7 +24,9 @@ const Cart = ({ id, name, image, price }: Product) => {
         <p className={`mt-5 text-lg font-medium capitalize ${dark && 'text-white'}`}>{name}</p>
         <p className={`mt-3 text-lg opacity-60 ${dark && 'text-white'}`}>{formatCurrency(price)}</p>
       </Link>
-      <FavoriteToggleButton id={id} />
+      <div className='absolute top-7 right-7'>
+        <FavoriteToggleButton id={id} />
+      </div>
     </div>
   );
 };
