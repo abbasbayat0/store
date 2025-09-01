@@ -5,8 +5,8 @@ import ProductsList from './ProductsList';
 import NoMatchedProducts from '@/components/ui/NoMatchedProducts';
 
 const ProductsContainer = async ({ layout, search }: { layout: string; search: string }) => {
-  const products = await getAll();
   const searchTerms = search ? `&${search}` : '';
+  const products = await getAll(search);
   const productsLength = products.length;
   const title = productsLength === 0 ? `no product found !` : `${productsLength} products`;
   return (
@@ -14,7 +14,7 @@ const ProductsContainer = async ({ layout, search }: { layout: string; search: s
       <div className='flex flex-col gap-5'>
         <div className='flex items-center justify-between'>
           <p className='text-lg font-semibold'>{title}</p>
-          <ProductsLayoutIcons layout={layout} />
+          <ProductsLayoutIcons layout={layout} searchTerms={searchTerms} />
         </div>
         <div className='w-full border-b border-gray-300'></div>
       </div>

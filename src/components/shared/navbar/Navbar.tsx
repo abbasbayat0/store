@@ -1,4 +1,5 @@
 'use client';
+import { Suspense } from 'react';
 import Container from '../global/Container';
 import CartButton from './CartButton';
 import DarkMode from './DarkMode';
@@ -13,7 +14,9 @@ const Navbar = () => {
         className={`flex flex-col flex-wrap gap-4 py-8 sm:flex-row sm:items-center sm:justify-between`}
       >
         <Logo />
-        <NavSearch />
+        <Suspense>
+          <NavSearch />
+        </Suspense>
         <div className='flex items-center gap-4'>
           <CartButton />
           <DarkMode />

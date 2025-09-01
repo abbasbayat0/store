@@ -3,7 +3,7 @@ import { RootState } from '@/lib/store/store';
 import { LuLayoutGrid, LuList } from 'react-icons/lu';
 import { useSelector } from 'react-redux';
 
-const ProductsLayoutIcons = ({ layout }: { layout: string }) => {
+const ProductsLayoutIcons = ({ layout, searchTerms }: { layout: string; searchTerms: string }) => {
   const dark = useSelector((state: RootState) => state.theme.dark);
   return (
     <div className='flex gap-5'>
