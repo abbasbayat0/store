@@ -1,0 +1,20 @@
+import BreadCrumbs from '@/components/shared/singleProduct/BreadCrumbs';
+import Description from '@/components/shared/singleProduct/Description';
+import { getSingle } from '@/lib/utils/actions';
+
+const page = async ({ params }: { params: { id: string } }) => {
+  const product = await getSingle(params.id);
+  return (
+    <div>
+      <BreadCrumbs name={product.name} />
+      <div className='lg:flex lg:gap-16'>
+        <div className='hidden mt-16 min-h-screen min-w-5/12 overflow-hidden rounded-lg lg:flex lg:mt-5'>
+          <img src={product.image} alt={params.id} className='min-h-full min-w-full object-cover' />
+        </div>
+        <Description {...product} />
+      </div>
+    </div>
+  );
+};
+
+export default page;

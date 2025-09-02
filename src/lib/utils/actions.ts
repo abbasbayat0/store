@@ -1,5 +1,6 @@
 'use server';
 
+import { redirect } from 'next/navigation';
 import db from './prisma';
 
 export const getFeatured = async () => {
@@ -22,4 +23,14 @@ export const getAll = async (search: string = '') => {
     },
   });
   return featured;
+};
+
+export const getSingle = async (id: string) => {
+  const product = await db.product.findUnique({
+    where: {
+      id: id,
+    },
+  });
+  if (!product) redirect('/products');
+  return product
 };

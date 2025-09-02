@@ -8,7 +8,7 @@ const ProductsContainer = async ({ layout, search }: { layout: string; search: s
   const searchTerms = search ? `&${search}` : '';
   const products = await getAll(search);
   const productsLength = products.length;
-  const title = productsLength === 0 ? `no product found !` : `${productsLength} products`;
+  const title = productsLength === 1 ? `${productsLength} product` : `${productsLength} products`;
   return (
     <>
       <div className='flex flex-col gap-5'>
