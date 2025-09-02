@@ -8,7 +8,7 @@ const page = async ({ params }: { params: { id: string } }) => {
     <div>
       <BreadCrumbs name={product.name} />
       <div className='lg:flex lg:gap-16'>
-        <div className='hidden mt-16 min-h-screen min-w-5/12 overflow-hidden rounded-lg lg:flex lg:mt-5'>
+        <div className='mt-16 hidden min-h-screen min-w-5/12 overflow-hidden rounded-lg lg:mt-5 lg:flex'>
           <img src={product.image} alt={params.id} className='min-h-full min-w-full object-cover' />
         </div>
         <Description {...product} />
