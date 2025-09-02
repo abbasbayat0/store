@@ -4,7 +4,7 @@ import { TbMenu3 } from 'react-icons/tb';
 import LinksDropDown from '@/components/ui/LinksDropDown';
 import { RootState } from '@/lib/store/store';
 import { useSelector } from 'react-redux';
-import UserIcon from './UserIcon';
+import UserIcon from './userIcon';
 
 const LinksDropdown = () => {
   const [dropOpen, setDropOpen] = useState(false);
