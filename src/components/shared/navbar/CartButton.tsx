@@ -1,3 +1,4 @@
+'use client';
 import { RootState } from '@/lib/store/store';
 import { LuShoppingCart } from 'react-icons/lu';
 import { useSelector } from 'react-redux';

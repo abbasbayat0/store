@@ -6,6 +6,7 @@ import FavoriteToggleButton from '../shared/products/FavoriteToggleButton';
 import { formatCurrency } from '@/lib/utils/format';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/lib/store/store';
+import Image from 'next/image';
 
 const List = ({ id, name, price, image, company }: Product) => {
   const dark = useSelector((state: RootState) => state.theme.dark);
@@ -15,7 +16,15 @@ const List = ({ id, name, price, image, company }: Product) => {
       className={`flex flex-col items-start justify-center rounded-md border border-gray-300 p-5 shadow-md transition duration-300 hover:shadow-lg sm:flex-row sm:gap-5 md:gap-20 lg:gap-28 lg:rounded-xl ${dark && 'border-gray-800'}`}
     >
       <div className='mx-auto flex h-72 w-11/12 overflow-hidden rounded-md sm:h-44 sm:max-w-44'>
-        <img src={image} alt={name} className='min-w-full object-cover' />
+        <Image
+          width={180}
+          height={180}
+          unoptimized
+          priority
+          src={image}
+          alt={name}
+          className='min-w-full object-cover'
+        />
       </div>
       <div className='sm:w-2/5'>
         <p className={`mt-5 text-xl font-medium capitalize sm:mt-0 ${dark && 'text-white'}`}>
