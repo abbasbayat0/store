@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 'use client';
 import { useState } from 'react';
 import { GrFormPreviousLink } from 'react-icons/gr';
@@ -8,6 +7,7 @@ import two from '@/assets/images/2.webp';
 import three from '@/assets/images/3.webp';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/lib/store/store';
+import Image from 'next/image';
 
 const HeroCarousel = () => {
   const list = [
@@ -37,9 +37,11 @@ const HeroCarousel = () => {
               key={item.index}
               className={`absolute flex h-11/12 w-11/12 items-center justify-center rounded-md border border-gray-300 lg:rounded-xl ${goRight && 'left-[130%]'} ${goLeft && '-left-[130%]'} ${!goLeft && !goRight && 'left-7'} transition-all duration-700 ease-out ${dark && 'border-gray-700'}`}
             >
-              <img
+              <Image
+                width={450}
+                height={650}
                 src={item.src.src}
-                alt='item.index'
+                alt={item.src.src}
                 className='h-[97%] w-[98%] rounded-md object-cover lg:rounded-lg'
               />
             </div>

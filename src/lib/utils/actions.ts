@@ -11,7 +11,7 @@ export const getFeatured = async () => {
 };
 
 export const getAll = async (search: string = '') => {
-  const featured = await db.product.findMany({
+  const all = await db.product.findMany({
     where: {
       OR: [
         { name: { contains: search, mode: 'insensitive' } },
@@ -22,7 +22,7 @@ export const getAll = async (search: string = '') => {
       createdAt: 'desc',
     },
   });
-  return featured;
+  return all;
 };
 
 export const getSingle = async (id: string) => {
@@ -32,5 +32,5 @@ export const getSingle = async (id: string) => {
     },
   });
   if (!product) redirect('/products');
-  return product
+  return product;
 };
