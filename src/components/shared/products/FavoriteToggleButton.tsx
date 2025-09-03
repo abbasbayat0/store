@@ -4,6 +4,7 @@ import { CiHeart } from 'react-icons/ci';
 import { useSelector } from 'react-redux';
 
 const FavoriteToggleButton = ({ id }: { id: string }) => {
+  console.log(id);
   const dark = useSelector((state: RootState) => state.theme.dark);
   return (
     <div

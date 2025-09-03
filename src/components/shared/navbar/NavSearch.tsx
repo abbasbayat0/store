@@ -19,7 +19,7 @@ const NavSearch = () => {
   };
   useEffect(() => {
     if (!searchParams.get('search')) setSearch('');
-  }, [searchParams.get('search')]);
+  }, [search, searchParams]);
   return (
     <input
       type='search'
