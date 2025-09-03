@@ -3,6 +3,7 @@ import { getAll } from '@/lib/utils/actions';
 import ProductsGrid from './ProductsGrid';
 import ProductsList from './ProductsList';
 import NoMatchedProducts from '@/components/ui/NoMatchedProducts';
+import ProductsTitle from '@/components/ui/ProductsTitle';
 
 const ProductsContainer = async ({ layout, search }: { layout: string; search: string }) => {
   const searchTerms = search ? `&${search}` : '';
@@ -13,7 +14,7 @@ const ProductsContainer = async ({ layout, search }: { layout: string; search: s
     <>
       <div className='flex flex-col gap-5'>
         <div className='flex items-center justify-between'>
-          <p className='text-lg font-semibold'>{title}</p>
+          <ProductsTitle title={title} />
           <ProductsLayoutIcons layout={layout} searchTerms={searchTerms} />
         </div>
         <div className='w-full border-b border-gray-300'></div>

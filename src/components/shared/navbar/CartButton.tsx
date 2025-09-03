@@ -11,7 +11,7 @@ const CartButton = () => {
     >
       <LuShoppingCart className='text-sm' />
       <span className='absolute -top-3 -right-3 flex h-5 w-5 items-center justify-center rounded-full bg-blue-600 text-sm text-white'>
-        9
+        0
       </span>
     </div>
   );

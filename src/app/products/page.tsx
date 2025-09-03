@@ -1,11 +1,15 @@
 import ProductsContainer from '../../components/shared/products/ProductsContainer';
-const page = ({ searchParams }: { searchParams: { layout?: string; search?: string } }) => {
-  const layout = searchParams.layout || 'grid';
-  const search = searchParams.search || '';
+const page = async ({
+  searchParams,
+}: {
+  searchParams: Promise<{ layout?: string; search?: string }>;
+}) => {
+  const layout = (await searchParams).layout || 'grid';
+  const search = (await searchParams).search || '';
   return (
-    <>
+    <div className='min-h-screen'>
       <ProductsContainer layout={layout} search={search} />
-    </>
+    </div>
   );
 };
 

@@ -6,7 +6,7 @@ import { formatCurrency } from '@/lib/utils/format';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../lib/store/store';
 
-const Description = ({ name, company, price, description }: Product) => {
+const Description = ({ id, name, company, price, description }: Product) => {
   const dark = useSelector((state: RootState) => state.theme.dark);
   return (
     <div>
@@ -17,7 +17,7 @@ const Description = ({ name, company, price, description }: Product) => {
           {name}
         </p>
         <div className='flex gap-2'>
-          <FavoriteToggleButton />
+          <FavoriteToggleButton id={id} />
           <SingleProductShareButton />
         </div>
       </div>

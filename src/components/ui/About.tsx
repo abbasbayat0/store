@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 const About = () => {
   const dark = useSelector((state: RootState) => state.theme.dark);
   return (
-    <div className='min-h-screen'>
+    <>
       <div className='mt-auto flex flex-col items-center justify-center min-[380px]:flex-row min-[380px]:gap-2 lg:gap-5'>
         <p
           className={`text-4xl font-bold sm:text-6xl ${dark && 'text-white'} transition duration-300`}
@@ -24,7 +24,7 @@ const About = () => {
           possimus nihil atque! Culpa nulla labore nam?
         </p>
       </div>
-    </div>
+    </>
   );
 };
 
