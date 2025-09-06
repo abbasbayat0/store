@@ -5,10 +5,11 @@ import Image from 'next/image';
 
 const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
-  const product = await getSingle(id);
+  const { message, data } = await getSingle(id);
+  if (!data) console.log(message);
   return (
-    <div>
-      <BreadCrumbs name={product.name} />
+    <div className='min-h-screen'>
+      <BreadCrumbs name={data.name} />
       <div className='lg:flex lg:gap-16'>
         <div className='mt-16 hidden min-h-screen min-w-5/12 overflow-hidden rounded-lg lg:mt-5 lg:flex'>
           <Image
@@ -16,12 +17,12 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
             height={400}
             priority
             unoptimized
-            src={product.image}
+            src={data.image}
             alt={id}
             className='min-h-full min-w-full object-cover'
           />
         </div>
-        <Description {...product} />
+        <Description {...data} />
       </div>
     </div>
   );
