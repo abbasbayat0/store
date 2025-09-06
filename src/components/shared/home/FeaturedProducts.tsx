@@ -6,13 +6,16 @@ import { Suspense } from 'react';
 import LoadingContainer from '../global/LoadingContainer';
 
 const FeaturedProducts = async () => {
-  const featuredProducts = await getFeatured();
-  if (featuredProducts.length === 0) return <EmptyList />;
+  const { message, data } = await getFeatured();
+  if (data.length === 0) {
+    console.log(message);
+    return <EmptyList />;
+  }
   return (
     <section className='pt-24'>
       <SectionTitle title='featured products' />
       <Suspense fallback={<LoadingContainer />}>
-        <ProductsGrid products={featuredProducts} />
+        <ProductsGrid data={data} />
       </Suspense>
     </section>
   );
