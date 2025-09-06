@@ -2,8 +2,9 @@
 
 import { RootState } from '@/lib/store/store';
 import { useSelector } from 'react-redux';
-const NoMatchedProducts = () => {
+const NoMatchedProducts = ({ message }: { message: string }) => {
   const dark = useSelector((state: RootState) => state.theme.dark);
+  console.log(message);
   return (
     <h1 className={`mt-10 text-center text-xl opacity-90 ${dark && 'text-white'}`}>
       there is no matched product !

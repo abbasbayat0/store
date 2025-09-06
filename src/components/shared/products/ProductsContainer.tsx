@@ -7,8 +7,8 @@ import ProductsTitle from '@/components/ui/ProductsTitle';
 
 const ProductsContainer = async ({ layout, search }: { layout: string; search: string }) => {
   const searchTerms = search ? `&${search}` : '';
-  const products = await getAll(search);
-  const productsLength = products.length;
+  const { message, data } = await getAll(search);
+  const productsLength = data.length;
   const title = productsLength === 1 ? `${productsLength} product` : `${productsLength} products`;
   return (
     <>
@@ -21,11 +21,11 @@ const ProductsContainer = async ({ layout, search }: { layout: string; search: s
       </div>
       <div>
         {productsLength === 0 ? (
-          <NoMatchedProducts />
+          <NoMatchedProducts message={message} />
         ) : layout === 'grid' ? (
-          <ProductsGrid products={products} />
+          <ProductsGrid data={data} />
         ) : (
-          <ProductsList products={products} />
+          <ProductsList data={data} />
         )}
       </div>
     </>
