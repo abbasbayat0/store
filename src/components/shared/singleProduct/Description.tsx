@@ -3,11 +3,10 @@ import { Product } from '@prisma/client';
 import FavoriteToggleButton from '../products/FavoriteToggleButton';
 import SingleProductShareButton from '@/components/ui/SingleProductShareButton';
 import { formatCurrency } from '@/lib/utils/format';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../lib/store/store';
+import useTheme from '@/lib/utils/useTheme';
 
 const Description = ({ id, name, company, price, description }: Product) => {
-  const dark = useSelector((state: RootState) => state.theme.dark);
+  const dark = useTheme();
   return (
     <div>
       <div className='mt-16 flex items-center gap-5 min-[480px]:w-[400px] lg:mt-5 lg:min-w-full lg:gap-10'>

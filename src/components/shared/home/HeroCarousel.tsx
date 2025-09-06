@@ -5,9 +5,8 @@ import { GrFormNextLink } from 'react-icons/gr';
 import one from '@/assets/images/1.webp';
 import two from '@/assets/images/2.webp';
 import three from '@/assets/images/3.webp';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/lib/store/store';
 import Image from 'next/image';
+import useTheme from '@/lib/utils/useTheme';
 
 const HeroCarousel = () => {
   const list = [
@@ -15,7 +14,7 @@ const HeroCarousel = () => {
     { src: two, index: 1 },
     { src: three, index: 2 },
   ];
-  const dark = useSelector((state: RootState) => state.theme.dark);
+  const dark = useTheme();
   const [active, setActive] = useState(0);
   const situation = active === 0 ? 'first' : active === list.length - 1 ? 'last' : '';
   // const handlePrev = () => {

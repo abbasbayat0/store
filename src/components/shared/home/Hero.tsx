@@ -1,11 +1,10 @@
 'use client';
-import { useSelector } from 'react-redux';
 import HeroCarousel from './HeroCarousel';
-import { RootState } from '@/lib/store/store';
 import Link from 'next/link';
+import useTheme from '@/lib/utils/useTheme';
 
 const Hero = () => {
-  const dark = useSelector((state: RootState) => state.theme.dark);
+  const dark = useTheme();
   return (
     <div className='flex items-center justify-between'>
       <div className='flex flex-col items-start justify-center lg:w-5/12'>

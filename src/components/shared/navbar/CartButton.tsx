@@ -1,10 +1,9 @@
 'use client';
-import { RootState } from '@/lib/store/store';
+import useTheme from '@/lib/utils/useTheme';
 import { LuShoppingCart } from 'react-icons/lu';
-import { useSelector } from 'react-redux';
 
 const CartButton = () => {
-  const dark = useSelector((state: RootState) => state.theme.dark);
+  const dark = useTheme();
 
   return (
     <div

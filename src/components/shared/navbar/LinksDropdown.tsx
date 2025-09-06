@@ -2,13 +2,12 @@
 import { useState } from 'react';
 import { TbMenu3 } from 'react-icons/tb';
 import LinksDropDown from '@/components/ui/LinksDropDown';
-import { RootState } from '@/lib/store/store';
-import { useSelector } from 'react-redux';
 import UserIcon from './userIcon';
+import useTheme from '@/lib/utils/useTheme';
 
 const LinksDropdown = () => {
   const [dropOpen, setDropOpen] = useState(false);
-  const dark = useSelector((state: RootState) => state.theme.dark);
+  const dark = useTheme();
   return (
     <div
       onClick={() => setDropOpen(!dropOpen)}

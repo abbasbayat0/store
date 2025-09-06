@@ -1,11 +1,10 @@
 'use client';
-import { RootState } from '@/lib/store/store';
+import useTheme from '@/lib/utils/useTheme';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 
 const NavSearch = () => {
-  const dark = useSelector((state: RootState) => state.theme.dark);
+  const dark = useTheme();
   const searchParams = useSearchParams();
   const [search, setSearch] = useState(searchParams.get('search') || '');
   const { replace } = useRouter();

@@ -1,11 +1,10 @@
 'use client';
-import { RootState } from '@/lib/store/store';
+import useTheme from '@/lib/utils/useTheme';
 import Link from 'next/link';
 import { IoIosArrowForward } from 'react-icons/io';
-import { useSelector } from 'react-redux';
 
 const BreadCrumbs = ({ name }: { name: string }) => {
-  const dark = useSelector((state: RootState) => state.theme.dark);
+  const dark = useTheme();
   return (
     <div className='flex w-10/12 items-center'>
       <Link
