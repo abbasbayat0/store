@@ -6,7 +6,7 @@ import NoMatchedProducts from '@/components/ui/NoMatchedProducts';
 import ProductsTitle from '@/components/ui/ProductsTitle';
 
 const ProductsContainer = async ({ layout, search }: { layout: string; search: string }) => {
-  const searchTerms = search ? `&${search}` : '';
+  const searchTerms = search ? `&search=${search}` : '';
   const { message, data } = await getAll(search);
   const productsLength = data.length;
   const title = productsLength === 1 ? `${productsLength} product` : `${productsLength} products`;
