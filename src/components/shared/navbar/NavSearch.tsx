@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 import useTheme from '@/lib/utils/useTheme';
 import { useSearchParams, useRouter } from 'next/navigation';
@@ -18,7 +19,7 @@ const NavSearch = () => {
   };
   useEffect(() => {
     if (!searchParams.get('search')) setSearch('');
-  }, [search, searchParams]);
+  }, [searchParams.get('search')]);
   return (
     <input
       type='search'
