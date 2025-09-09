@@ -16,8 +16,6 @@ export const getFeatured = unstable_cache(
       message = `success, you have ${data.length} products`;
     } catch (error) {
       message = `failed because of ${error}`;
-    } finally {
-      await db.$disconnect();
     }
     return { message, data };
   },
@@ -44,8 +42,6 @@ export const getAll = unstable_cache(
       message = `success, you have ${data.length} products`;
     } catch (error) {
       message = `failed because of ${error}`;
-    } finally {
-      await db.$disconnect();
     }
     return { message, data };
   },
@@ -63,12 +59,10 @@ export const getSingle = unstable_cache(
           id: id,
         },
       });
+      if (!data) redirect('/products');
       message = `product with id:${id} now available in data`;
     } catch (error) {
       message = `failed because of ${error}`;
-    } finally {
-      await db.$disconnect();
-      if (!data) redirect('/products');
     }
     return { message, data };
   },
