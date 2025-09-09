@@ -5,6 +5,8 @@ import Navbar from '@/components/shared/navbar/Navbar';
 import ThemeProvider from '@/components/shared/global/ThemeProvider';
 import AppProvider from '@/components/shared/global/AppProvider';
 
+import { ClerkProvider } from '@clerk/nextjs';
+
 export const metadata: Metadata = {
   title: 'Store',
   description: 'Still My Training Store',
@@ -16,15 +18,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
-      <AppProvider>
-        <body>
-          <ThemeProvider>
-            <Navbar />
-            <Container className='py-20 min-h-screen'>{children}</Container>
-          </ThemeProvider>
-        </body>
-      </AppProvider>
-    </html>
+    <ClerkProvider>
+      <html lang='en'>
+        <AppProvider>
+          <body>
+            <ThemeProvider>
+              <Navbar />
+              <Container className='min-h-screen py-20'>{children}</Container>
+            </ThemeProvider>
+          </body>
+        </AppProvider>
+      </html>
+    </ClerkProvider>
   );
 }

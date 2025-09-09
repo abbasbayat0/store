@@ -4,6 +4,7 @@ import { RootState } from '@/lib/store/store';
 import Link from 'next/link';
 import { Dispatch, SetStateAction } from 'react';
 import { useSelector } from 'react-redux';
+import SignOut from '../shared/navbar/SignOut';
 
 const DarkModeDropdown = ({ setDropOpen }: { setDropOpen: Dispatch<SetStateAction<boolean>> }) => {
   const dark = useSelector((state: RootState) => state.theme.dark);
@@ -29,6 +30,7 @@ const DarkModeDropdown = ({ setDropOpen }: { setDropOpen: Dispatch<SetStateActio
           </div>
         );
       })}
+      <SignOut />
     </div>
   );
 };
