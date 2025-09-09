@@ -1,7 +1,7 @@
 'use client';
 import HeroCarousel from './HeroCarousel';
 import Link from 'next/link';
-import useTheme from '@/lib/utils/useTheme';
+import useTheme from '@/lib/hooks/useTheme';
 
 const Hero = () => {
   const dark = useTheme();

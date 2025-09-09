@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux';
 const DarkModeDropdown = ({ setDropOpen }: { setDropOpen: Dispatch<SetStateAction<boolean>> }) => {
   const dispatch = useDispatch();
   const dark = useSelector((state: RootState) => state.theme.dark);
-  console.log(dark);
   return (
     <div
       className={`absolute right-0 -bottom-[80px] flex w-28 flex-col items-start justify-around gap-2 rounded-md px-2 py-2 ${dark ? 'border border-gray-800 bg-gray-950' : 'border-none bg-white shadow-md shadow-gray-300'}`}

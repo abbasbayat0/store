@@ -1,7 +1,7 @@
 'use client';
 import DarkModeDropdown from '@/components/ui/DarkModeDropdown';
 import DarkModeIcons from '@/components/ui/DarkModeIcons';
-import useTheme from '@/lib/utils/useTheme';
+import useTheme from '@/lib/hooks/useTheme';
 import { useState } from 'react';
 
 const DarkMode = () => {

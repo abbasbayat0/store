@@ -1,8 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { initialDark } from '../utils/initialDark';
 
 const initialState: { dark: boolean } = {
-  dark: initialDark(),
+  dark: false,
 };
 const themeSlice = createSlice({
   name: 'themeSlice',
@@ -12,7 +11,12 @@ const themeSlice = createSlice({
       state.dark = action.payload;
       localStorage.setItem('theme', JSON.stringify(state.dark));
     },
+    initializeTheme: (state) => {
+      state.dark =
+        window.matchMedia('(prefers-color-scheme: dark)').matches &&
+        Boolean(JSON.parse(localStorage.getItem('theme') as string));
+    },
   },
 });
-export const { changeTheme } = themeSlice.actions;
+export const { changeTheme, initializeTheme } = themeSlice.actions;
 export default themeSlice.reducer;

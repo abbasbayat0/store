@@ -3,7 +3,7 @@ import { Product } from '@prisma/client';
 import FavoriteToggleButton from '../products/FavoriteToggleButton';
 import SingleProductShareButton from '@/components/ui/SingleProductShareButton';
 import { formatCurrency } from '@/lib/utils/format';
-import useTheme from '@/lib/utils/useTheme';
+import useTheme from '@/lib/hooks/useTheme';
 
 const Description = ({ id, name, company, price, description }: Product) => {
   const dark = useTheme();

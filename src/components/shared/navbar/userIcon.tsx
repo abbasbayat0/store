@@ -1,6 +1,6 @@
 import { LuUserRound } from 'react-icons/lu';
 
-const userIcon = () => {
+const UserIcon = () => {
   return (
     <div className='flex h-6 w-6 items-center justify-center rounded-full bg-blue-600'>
       <LuUserRound className='text-2xl text-white' />
@@ -8,4 +8,4 @@ const userIcon = () => {
   );
 };
 
-export default userIcon;
+export default UserIcon;

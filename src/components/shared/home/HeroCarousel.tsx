@@ -6,7 +6,7 @@ import one from '@/assets/images/1.webp';
 import two from '@/assets/images/2.webp';
 import three from '@/assets/images/3.webp';
 import Image from 'next/image';
-import useTheme from '@/lib/utils/useTheme';
+import useTheme from '@/lib/hooks/useTheme';
 
 const HeroCarousel = () => {
   const list = [

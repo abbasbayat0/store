@@ -1,5 +1,5 @@
 'use client';
-import useTheme from '@/lib/utils/useTheme';
+import useTheme from '@/lib/hooks/useTheme';
 
 const SectionTitle = ({ title }: { title: string }) => {
   const dark = useTheme();

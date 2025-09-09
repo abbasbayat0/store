@@ -1,5 +1,5 @@
 'use client';
-import useTheme from '@/lib/utils/useTheme';
+import useTheme from '@/lib/hooks/useTheme';
 import { LuShoppingCart } from 'react-icons/lu';
 
 const CartButton = () => {

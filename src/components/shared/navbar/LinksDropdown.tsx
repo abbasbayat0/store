@@ -2,8 +2,8 @@
 import { useState } from 'react';
 import { TbMenu3 } from 'react-icons/tb';
 import LinksDropDown from '@/components/ui/LinksDropDown';
+import useTheme from '@/lib/hooks/useTheme';
 import UserIcon from './userIcon';
-import useTheme from '@/lib/utils/useTheme';
 
 const LinksDropdown = () => {
   const [dropOpen, setDropOpen] = useState(false);

@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client';
-import useTheme from '@/lib/utils/useTheme';
+import useTheme from '@/lib/hooks/useTheme';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 const NavSearch = () => {
-  const dark = useTheme();
+  const dark = useTheme() || false;
   const searchParams = useSearchParams();
   const [search, setSearch] = useState(searchParams.get('search') || '');
   const { replace } = useRouter();
@@ -30,6 +30,7 @@ const NavSearch = () => {
       value={search}
       placeholder='Search Products ...'
       className={`w-full max-w-[320px] rounded-md p-2 px-3 text-sm font-medium outline-none focus:border-blue-600 ${dark ? 'border border-gray-800 bg-gray-800 text-white focus:border-blue-600' : 'border border-gray-300 shadow-2xs shadow-gray-300'} transition duration-300`}
+      suppressHydrationWarning={true}
     />
   );
 };

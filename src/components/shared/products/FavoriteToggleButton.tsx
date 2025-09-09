@@ -1,5 +1,5 @@
 'use client';
-import useTheme from '@/lib/utils/useTheme';
+import useTheme from '@/lib/hooks/useTheme';
 import { CiHeart } from 'react-icons/ci';
 
 const FavoriteToggleButton = ({ id }: { id: string }) => {
