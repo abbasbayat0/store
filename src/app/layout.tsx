@@ -21,7 +21,7 @@ export default function RootLayout({
         <body>
           <ThemeProvider>
             <Navbar />
-            <Container className='py-20'>{children}</Container>
+            <Container className='py-20 min-h-screen'>{children}</Container>
           </ThemeProvider>
         </body>
       </AppProvider>
