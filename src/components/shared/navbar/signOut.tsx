@@ -1,7 +1,7 @@
 import { SignOutButton } from '@clerk/nextjs';
 import Link from 'next/link';
 
-const SignOut = async () => {
+const SignOut = () => {
   return (
     <SignOutButton>
       <Link href='/'>signOut</Link>
