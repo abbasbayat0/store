@@ -5,7 +5,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 const NavSearch = () => {
-  const dark = useTheme() || false;
+  const dark = useTheme();
   const searchParams = useSearchParams();
   const [search, setSearch] = useState(searchParams.get('search') || '');
   const { replace } = useRouter();

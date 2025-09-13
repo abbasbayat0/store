@@ -69,3 +69,7 @@ export const getSingle = unstable_cache(
   ['unique'],
   { tags: ['unique'], revalidate: 1800 },
 );
+
+export const handleSubmit = async (formData: FormData) => {
+  console.log(formData.get('name'));
+};
