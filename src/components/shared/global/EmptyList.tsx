@@ -5,7 +5,7 @@ const EmptyList = ({
   text?: string;
   className?: string;
 }) => {
-  return <h2 className={`text-xl ${className}`}>{text}</h2>;
+  return <h2 className={`mt-10 text-center text-xl ${className}`}>{text}</h2>;
 };
 
 export default EmptyList;
