@@ -1,13 +1,18 @@
 'use client';
-import { links } from '@/assets/links';
-import { RootState } from '@/lib/store/store';
 import Link from 'next/link';
 import { Dispatch, SetStateAction } from 'react';
-import { useSelector } from 'react-redux';
 import SignOut from '../shared/navbar/SignOut';
+import type { NavLink } from '@/assets/links';
+import useTheme from '@/lib/hooks/useTheme';
 
-const DarkModeDropdown = ({ setDropOpen }: { setDropOpen: Dispatch<SetStateAction<boolean>> }) => {
-  const dark = useSelector((state: RootState) => state.theme.dark);
+const DarkModeDropdown = ({
+  setDropOpen,
+  links,
+}: {
+  setDropOpen: Dispatch<SetStateAction<boolean>>;
+  links: NavLink[];
+}) => {
+  const dark = useTheme();
   return (
     <div
       className={`absolute top-9 left-0 flex w-36 flex-col items-start justify-around gap-1 rounded-md px-2 py-2 sm:w-28 lg:w-32 xl:w-36 ${dark ? 'border border-gray-800 bg-gray-950' : 'border-none bg-white shadow-md shadow-gray-300'} transition duration-300`}

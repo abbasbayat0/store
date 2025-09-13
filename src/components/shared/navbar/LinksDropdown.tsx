@@ -4,6 +4,9 @@ import { TbMenu3 } from 'react-icons/tb';
 import LinksDropDown from '@/components/ui/LinksDropDown';
 import useTheme from '@/lib/hooks/useTheme';
 import UserIcon from './userIcon';
+import { SignedIn, SignedOut } from '@clerk/nextjs';
+import { links } from '@/assets/links';
+import SignedOutLinks from '@/components/ui/SignedOutLinks';
 
 const LinksDropdown = () => {
   const [dropOpen, setDropOpen] = useState(false);
@@ -15,7 +18,8 @@ const LinksDropdown = () => {
     >
       <TbMenu3 className='text-2xl' />
       <UserIcon />
-      {dropOpen && <LinksDropDown setDropOpen={setDropOpen} />}
+      <SignedIn>{dropOpen && <LinksDropDown setDropOpen={setDropOpen} links={links} />}</SignedIn>
+      <SignedOut>{dropOpen && <SignedOutLinks setDropOpen={setDropOpen} />}</SignedOut>
     </div>
   );
 };
