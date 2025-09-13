@@ -7,7 +7,7 @@ const isAdmin = createRouteMatcher(['/admin(.*)']);
 export default clerkMiddleware(async (auth, req) => {
   if (!isPublic(req)) await auth.protect();
   const { userId } = await auth();
-  if (isAdmin(req) && 'user_32TrZDTjoEoGNhNwIXLEaQF8Rxu' !== userId)
+  if (isAdmin(req) && userId !== 'user_32TrZDTjoEoGNhNwIXLEaQF8Rxu')
     return NextResponse.redirect(new URL('/', req.url));
 });
 
