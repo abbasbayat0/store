@@ -16,7 +16,9 @@ const SignedOutLinks = ({ setDropOpen }: { setDropOpen: Dispatch<SetStateAction<
           className={`flex h-7 w-full items-center rounded-md px-2 tracking-wide opacity-80 transition ${dark ? 'hover:bg-gray-800' : 'hover:bg-gray-100'} transition duration-300`}
           onClick={() => setDropOpen(false)}
         >
-          <SignInButton mode='modal'><p>Log In</p></SignInButton>
+          <SignInButton mode='modal'>
+            <p className='capitalize'>Log In</p>
+          </SignInButton>
         </div>
       </div>
       <div
@@ -26,7 +28,9 @@ const SignedOutLinks = ({ setDropOpen }: { setDropOpen: Dispatch<SetStateAction<
           className={`flex h-7 w-full items-center rounded-md px-2 tracking-wide opacity-80 transition ${dark ? 'hover:bg-gray-800' : 'hover:bg-gray-100'} transition duration-300`}
           onClick={() => setDropOpen(false)}
         >
-          <SignUpButton mode='modal'><p>Register</p></SignUpButton>
+          <SignUpButton mode='modal'>
+            <p className='capitalize'>Register</p>
+          </SignUpButton>
         </div>
       </div>
     </div>

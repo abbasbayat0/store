@@ -28,7 +28,7 @@ const DarkModeDropdown = ({
               onClick={() => {
                 setDropOpen(false);
               }}
-              className={`flex h-7 w-full items-center rounded-md px-2 tracking-wide opacity-80 transition ${dark ? 'hover:bg-gray-800' : 'hover:bg-gray-100'} transition duration-300`}
+              className={`flex h-7 w-full items-center rounded-md px-2 tracking-wide opacity-80 transition ${dark ? 'hover:bg-gray-800' : 'hover:bg-gray-100'} capitalize transition duration-300`}
             >
               {link.label}
             </Link>
