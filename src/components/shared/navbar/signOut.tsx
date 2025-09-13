@@ -4,7 +4,7 @@ import Link from 'next/link';
 const SignOut = () => {
   return (
     <SignOutButton>
-      <Link href='/' className='opacity-70 text-sm mx-auto mt-2 font-bold'>Sign Out</Link>
+      <Link href='/' className='opacity-70 text-sm mx-2 my-2 font-bold'>Sign Out</Link>
     </SignOutButton>
   );
 };

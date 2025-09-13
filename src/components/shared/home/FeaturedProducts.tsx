@@ -9,7 +9,7 @@ const FeaturedProducts = async () => {
   const { message, data } = await getFeatured();
   if (data.length === 0) {
     console.log(message);
-    return <EmptyList />;
+    return <EmptyList text='There Is No Featured Products' className='mt-20' />;
   }
   return (
     <section className='pt-24'>

@@ -10,6 +10,10 @@ export const links: NavLink[] = [
   { href: '/favorites', label: 'favorites' },
   { href: '/cart', label: 'cart' },
   { href: '/orders', label: 'orders' },
+  { href: '/admin/sales', label: 'dashboard' },
 ];
 
-export const signedOutLinks: NavLink[] = [{ href: '/' }];
+export const adminLinks: NavLink[] = [
+  { href: '/admin/sales', label: 'products' },
+  { href: '/admin/products/create', label: 'create a product' },
+];
