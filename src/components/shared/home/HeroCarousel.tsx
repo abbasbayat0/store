@@ -6,7 +6,6 @@ import one from '@/assets/images/1.webp';
 import two from '@/assets/images/2.webp';
 import three from '@/assets/images/3.webp';
 import Image from 'next/image';
-import useTheme from '@/lib/hooks/useTheme';
 
 const HeroCarousel = () => {
   const list = [
@@ -14,7 +13,6 @@ const HeroCarousel = () => {
     { src: two, index: 1 },
     { src: three, index: 2 },
   ];
-  const dark = useTheme();
   const [active, setActive] = useState(0);
   const situation = active === 0 ? 'first' : active === list.length - 1 ? 'last' : '';
   // const handlePrev = () => {
@@ -34,7 +32,7 @@ const HeroCarousel = () => {
           return (
             <div
               key={item.index}
-              className={`absolute flex h-11/12 w-11/12 items-center justify-center rounded-md border border-gray-300 lg:rounded-xl ${goRight && 'left-[130%]'} ${goLeft && '-left-[130%]'} ${!goLeft && !goRight && 'left-7'} transition-all duration-900 ease-out ${dark && 'border-gray-700'}`}
+              className={`absolute flex h-11/12 w-11/12 items-center justify-center rounded-md border border-gray-300 lg:rounded-xl ${goRight && 'left-[130%]'} ${goLeft && '-left-[130%]'} ${!goLeft && !goRight && 'left-7'} transition-all duration-900 ease-out dark:border-gray-700`}
             >
               <Image
                 width={450}
@@ -50,14 +48,14 @@ const HeroCarousel = () => {
       <div className='absolute flex w-full items-center justify-between'>
         <button
           disabled={situation === 'first'}
-          className={`cursor-pointer rounded-full border border-gray-300 bg-[#e5e7eb88] p-1 text-xl disabled:cursor-not-allowed disabled:opacity-40 ${dark && 'border-gray-700 bg-gray-800 text-gray-300'} transition duration-300`}
+          className={`cursor-pointer rounded-full border border-gray-300 bg-[#e5e7eb88] p-1 text-xl transition duration-300 disabled:cursor-not-allowed disabled:opacity-40 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300`}
           onClick={() => setActive(active - 1)}
         >
           <GrFormPreviousLink />
         </button>
         <button
           disabled={situation === 'last'}
-          className={`cursor-pointer rounded-full border border-gray-300 bg-[#e5e7eb88] p-1 text-xl disabled:cursor-not-allowed disabled:opacity-40 ${dark && 'border-gray-700 bg-gray-800 text-gray-300'} transition duration-300`}
+          className={`cursor-pointer rounded-full border border-gray-300 bg-[#e5e7eb88] p-1 text-xl transition duration-300 disabled:cursor-not-allowed disabled:opacity-40 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300`}
           onClick={() => setActive(active + 1)}
         >
           <GrFormNextLink />

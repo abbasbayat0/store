@@ -1,15 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { setHtmlClass } from '../utils/darkHTML';
 
 const initialState: { dark: boolean } = {
   dark: false,
-};
-
-const setHtmlClass = (dark: boolean) => {
-  if (dark) {
-    document.documentElement.classList.add('dark');
-  } else {
-    document.documentElement.classList.remove('dark');
-  }
 };
 
 const themeSlice = createSlice({

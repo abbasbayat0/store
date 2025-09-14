@@ -1,5 +1,3 @@
-import useTheme from '@/lib/hooks/useTheme';
-
 type FormInputProps = {
   name: string;
   type: string;
@@ -9,13 +7,9 @@ type FormInputProps = {
 };
 
 const FormInput = ({ name, type, label, defaultValue, placeholder }: FormInputProps) => {
-  const dark = useTheme();
   return (
     <>
-      <label
-        htmlFor={name}
-        className={`font-medium ${dark && 'text-white'} transition duration-300`}
-      >
+      <label htmlFor={name} className={`font-medium transition duration-300 dark:text-white`}>
         {label || name}
       </label>
       <input
@@ -24,7 +18,7 @@ const FormInput = ({ name, type, label, defaultValue, placeholder }: FormInputPr
         id={name}
         placeholder={placeholder}
         defaultValue={defaultValue}
-        className={`mt-1 rounded-md border px-2 py-1 opacity-50 transition duration-300 focus:opacity-100 focus:shadow-sm focus:outline-none ${dark ? 'border-gray-800 text-white' : 'border-gray-300'} transition duration-300`}
+        className={`border-gray-300} mt-1 rounded-md border px-2 py-1 opacity-50 transition duration-300 focus:opacity-100 focus:shadow-sm focus:outline-none dark:border-gray-800 dark:text-white`}
       />
     </>
   );
