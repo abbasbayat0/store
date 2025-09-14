@@ -1,4 +1,5 @@
-"use client"
+'use client';
+import Button from '@/components/shared/form/Button';
 import FormInput from '@/components/shared/form/FormInput';
 import useTheme from '@/lib/hooks/useTheme';
 import { handleSubmit } from '@/lib/utils/actions';
@@ -16,12 +17,7 @@ const adminCreatePage = () => {
         className={`mt-5 flex w-full flex-col rounded-md border p-8 shadow-md ${dark ? 'border-gray-800' : 'border-gray-300'} transition duration-300`}
       >
         <FormInput name='product' type='text' defaultValue={fakeName} label='Product Name' />
-        <button
-          type='submit'
-          className={`mt-10 w-32 cursor-pointer rounded-lg bg-blue-600 px-3 py-2 text-white`}
-        >
-          Submit
-        </button>
+        <Button />
       </form>
     </div>
   );
