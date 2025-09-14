@@ -4,6 +4,7 @@ import { Dispatch, SetStateAction } from 'react';
 import SignOut from '../shared/navbar/SignOut';
 import type { NavLink } from '@/assets/links';
 import useTheme from '@/lib/hooks/useTheme';
+import { useUser } from '@clerk/nextjs';
 
 const DarkModeDropdown = ({
   setDropOpen,
@@ -13,11 +14,13 @@ const DarkModeDropdown = ({
   links: NavLink[];
 }) => {
   const dark = useTheme();
+  const id = useUser().user?.id;
   return (
     <div
       className={`absolute top-9 left-0 flex w-36 flex-col items-start justify-around gap-1 rounded-md px-2 py-2 sm:w-28 lg:w-32 xl:w-36 ${dark ? 'border border-gray-800 bg-gray-950' : 'border-none bg-white shadow-md shadow-gray-300'} transition duration-300`}
     >
       {links.map((link) => {
+        if (id !== 'user_32TrZDTjoEoGNhNwIXLEaQF8Rxu' && link.label === 'dashboard') return null;
         return (
           <div
             key={link.label}
