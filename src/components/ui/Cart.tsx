@@ -13,7 +13,7 @@ const Cart = ({ id, name, image, price }: Product) => {
     <div className='relative'>
       <Link
         href={`/products/${id}`}
-        className={`group flex w-66 flex-col items-center justify-center rounded-md border border-gray-300 p-5 shadow-md transition duration-300 hover:shadow-lg lg:w-72 lg:rounded-xl xl:w-[370px] ${dark && 'border-gray-800'}`}
+        className={`group flex w-66 flex-col items-center justify-center rounded-md border p-5 shadow-md transition duration-300 hover:shadow-lg lg:w-72 lg:rounded-xl xl:w-[370px] ${dark ? 'border-gray-800' : 'border-gray-300'}`}
       >
         <div className='mx-auto flex h-52 w-full overflow-hidden rounded-md'>
           <Image
