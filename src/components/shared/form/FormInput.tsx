@@ -20,7 +20,8 @@ const FormInput = ({ name, type, label, defaultValue, placeholder }: FormInputPr
       </label>
       <input
         type={type}
-        name='name'
+        name={name}
+        id={name}
         placeholder={placeholder}
         defaultValue={defaultValue}
         className={`mt-1 rounded-md border px-2 py-1 opacity-50 transition duration-300 focus:opacity-100 focus:shadow-sm focus:outline-none ${dark ? 'border-gray-800 text-white' : 'border-gray-300'} transition duration-300`}
