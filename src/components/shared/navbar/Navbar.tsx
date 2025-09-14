@@ -6,8 +6,10 @@ import DarkMode from './DarkMode';
 import LinksDropdown from './LinksDropdown';
 import Logo from './Logo';
 import NavSearch from './NavSearch';
+import useTheme from '@/lib/hooks/useTheme';
 
 const Navbar = () => {
+  const dark = useTheme();
   return (
     <nav className='border-b border-gray-300'>
       <Container
@@ -15,7 +17,7 @@ const Navbar = () => {
       >
         <Logo />
         <Suspense>
-          <NavSearch />
+          <NavSearch dark={dark} />
         </Suspense>
         <div className='flex items-center gap-4'>
           <CartButton />

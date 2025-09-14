@@ -1,3 +1,7 @@
+'use client';
+
+import useTheme from '@/lib/hooks/useTheme';
+
 const EmptyList = ({
   text = 'no items found',
   className,
@@ -5,7 +9,12 @@ const EmptyList = ({
   text?: string;
   className?: string;
 }) => {
-  return <h2 className={`mt-10 text-center text-xl ${className}`}>{text}</h2>;
+  const dark = useTheme();
+  return (
+    <h2 className={`mt-10 text-center text-xl ${dark ? 'text-white' : 'text-black'} ${className}`}>
+      {text}
+    </h2>
+  );
 };
 
 export default EmptyList;

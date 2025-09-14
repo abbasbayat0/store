@@ -1,11 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-'use client';
-import useTheme from '@/lib/hooks/useTheme';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-const NavSearch = () => {
-  const dark = useTheme();
+const NavSearch = ({ dark }: { dark: boolean }) => {
   const searchParams = useSearchParams();
   const [search, setSearch] = useState(searchParams.get('search') || '');
   const { replace } = useRouter();
