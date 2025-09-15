@@ -15,9 +15,7 @@ const themeSlice = createSlice({
       setHtmlClass(state.dark);
     },
     initializeTheme: (state) => {
-      state.dark =
-        window.matchMedia('(prefers-color-scheme: dark)').matches &&
-        Boolean(JSON.parse(localStorage.getItem('theme') as string));
+      state.dark = Boolean(JSON.parse(localStorage.getItem('theme') as string));
       setHtmlClass(state.dark);
     },
   },

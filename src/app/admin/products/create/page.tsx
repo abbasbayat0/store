@@ -1,10 +1,11 @@
 import Button from '@/components/shared/form/Button';
-import PriceInput from '@/components/shared/form/CheckboxInput';
+import PriceInput from '@/components/shared/form/PriceInput';
 import FormContainer from '@/components/shared/form/FormContainer';
 import FormInput from '@/components/shared/form/FormInput';
 import ImageInput from '@/components/shared/form/ImageInput';
 import TextArea from '@/components/shared/form/TextArea';
 import { createNewProduct } from '@/lib/utils/actions';
+import CheckboxInput from '@/components/shared/form/CheckedInput';
 
 const adminCreatePage = () => {
   return (
@@ -33,9 +34,10 @@ const adminCreatePage = () => {
         <TextArea
           name='description'
           labelText='Product Description'
-          defaultValue='enter your description here for the new product'
+          defaultValue='enter your description here for the new product (it has to be at least 10 words)'
           className='mt-5 sm:mt-8'
         />
+        <CheckboxInput label='Featured:' name='featured' className='mt-5' />
         <Button />
       </FormContainer>
     </div>

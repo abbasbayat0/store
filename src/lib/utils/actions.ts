@@ -4,6 +4,10 @@ import { redirect } from 'next/navigation';
 import db from './prisma';
 import { Product } from '@prisma/client';
 import { unstable_cache } from 'next/cache';
+import { raw } from '@prisma/client/runtime/library';
+import { catchError } from './errorCatch';
+import { getUser } from './getUser';
+import { productSchema } from './zodSchema';
 
 export const getFeatured = unstable_cache(
   async () => {
@@ -75,6 +79,22 @@ export const createNewProduct = async (
   prevState: any,
   formData: FormData,
 ): Promise<{ message: string }> => {
-  console.log(formData);
-  return { message: 'created' };
+  const user = await getUser();
+  try {
+    const rawData = Object.fromEntries(formData);
+    const validated = productSchema.safeParse(rawData);
+    if (!validated.success) {
+      console.log(validated.error);
+    }
+    await db.product.create({
+      data: {
+        ...validated.data,
+        image: '../../app/favicon.ico',
+        clerkId: user.id,
+      },
+    });
+    return { message: 'created' };
+  } catch (error) {
+    return catchError(error);
+  }
 };
