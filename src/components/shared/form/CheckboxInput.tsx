@@ -1,24 +1,28 @@
-type FormInputProps = {
-  name: string;
-  label: string;
-  defaultChecked?: boolean;
+const name = 'price';
+type FormInputNumberProps = {
+  defaultValue?: number;
+  className?: string;
 };
 
-const PriceInput = ({ defaultChecked, name, label }: FormInputProps) => {
+function PriceInput({ defaultValue, className }: FormInputNumberProps) {
   return (
-    <div className='flex gap-2'>
-      <input
-        type='checkbox'
-        name={name}
-        id={name}
-        defaultChecked={defaultChecked}
-        className={`mt-1 rounded-md border border-gray-300 px-2 py-1 opacity-50 transition duration-300 focus:opacity-100 focus:shadow-sm focus:outline-none dark:border-gray-800 dark:text-white`}
-      />
-      <label htmlFor={name} className={`font-medium transition duration-300 dark:text-white`}>
-        {label}
+    <div className={`${className} flex flex-col`}>
+      <label
+        htmlFor='price'
+        className={`w-full font-medium transition duration-300 dark:text-white`}
+      >
+        Price ($)
       </label>
+      <input
+        id={name}
+        type='number'
+        name={name}
+        min={0}
+        defaultValue={defaultValue || 100}
+        required
+        className={`mt-1 w-48 rounded-md border border-gray-300 px-2 py-1 opacity-50 transition duration-300 focus:opacity-100 focus:shadow-sm focus:outline-none min-[400px]:w-52 min-[500px]:w-64 sm:w-44 md:w-52 lg:w-72 dark:border-gray-800 dark:text-white`}
+      />
     </div>
   );
-};
-
+}
 export default PriceInput;
