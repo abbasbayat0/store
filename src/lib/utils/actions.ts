@@ -70,6 +70,11 @@ export const getSingle = unstable_cache(
   { tags: ['unique'], revalidate: 1800 },
 );
 
-export const handleSubmit = async (formData: FormData) => {
-  console.log(formData.get('name'));
+export const createNewProduct = async (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  prevState: any,
+  formData: FormData,
+): Promise<{ message: string }> => {
+  console.log(formData);
+  return { message: 'created' };
 };
