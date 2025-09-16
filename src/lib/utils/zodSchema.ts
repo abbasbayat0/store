@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z, ZodSchema } from 'zod';
 
 export const productSchema = z.object({
   name: z
@@ -24,3 +24,11 @@ export const productSchema = z.object({
     },
   ),
 });
+
+export const validationWithZod = <T>(schema: ZodSchema<T>, data: unknown):T => {
+  const validated = schema.safeParse(data);
+  if (!validated.success) {
+    throw new Error(validated.error.message);
+  }
+  return validated.data;
+};

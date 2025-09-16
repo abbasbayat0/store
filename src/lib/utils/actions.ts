@@ -7,7 +7,7 @@ import { unstable_cache } from 'next/cache';
 import { raw } from '@prisma/client/runtime/library';
 import { catchError } from './errorCatch';
 import { getUser } from './getUser';
-import { productSchema } from './zodSchema';
+import { productSchema, validationWithZod } from './zodSchema';
 
 export const getFeatured = unstable_cache(
   async () => {
@@ -82,13 +82,10 @@ export const createNewProduct = async (
   const user = await getUser();
   try {
     const rawData = Object.fromEntries(formData);
-    const validated = productSchema.safeParse(rawData);
-    if (!validated.success) {
-      console.log(validated.error);
-    }
+    const validated = validationWithZod(productSchema, rawData);
     await db.product.create({
       data: {
-        ...validated.data,
+        ...validated,
         image: '../../app/favicon.ico',
         clerkId: user.id,
       },
