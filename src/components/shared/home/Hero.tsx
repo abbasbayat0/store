@@ -1,3 +1,4 @@
+import HeroButtonLoadingIndicator from '@/components/ui/HeroButtonLoadingIndicator';
 import HeroCarousel from './HeroCarousel';
 import Link from 'next/link';
 
@@ -14,11 +15,7 @@ const Hero = () => {
           perferendis unde sint doloremque non nam.
         </p>
         <Link href='/products' className='cursor-pointer'>
-          <button
-            className={`mt-10 cursor-pointer rounded-md bg-blue-600 px-8 py-3 text-xs font-medium text-white opacity-90 transition duration-300`}
-          >
-            OUR PRODUCTS
-          </button>
+          <HeroButtonLoadingIndicator />
         </Link>
       </div>
       <HeroCarousel />
