@@ -3,11 +3,12 @@
 import { redirect } from 'next/navigation';
 import db from './prisma';
 import { Product } from '@prisma/client';
-import { unstable_cache } from 'next/cache';
+import { revalidateTag, unstable_cache } from 'next/cache';
 import { raw } from '@prisma/client/runtime/library';
 import { catchError } from './errorCatch';
 import { getUser } from './getUser';
-import { productSchema, validationWithZod } from './zodSchema';
+import { imageSchema, productSchema, validationWithZod } from './zodSchema';
+import { uploadImage } from './supabase';
 
 export const getFeatured = unstable_cache(
   async () => {
@@ -16,6 +17,9 @@ export const getFeatured = unstable_cache(
     try {
       data = await db.product.findMany({
         where: { featured: true },
+        orderBy: {
+          createdAt: 'desc',
+        },
       });
       message = `success, you have ${data.length} products`;
     } catch (error) {
@@ -24,7 +28,7 @@ export const getFeatured = unstable_cache(
     return { message, data };
   },
   ['featured'],
-  { tags: ['featured'], revalidate: 1800 },
+  { tags: ['featured', 'all'], revalidate: 1000 },
 );
 
 export const getAll = unstable_cache(
@@ -50,7 +54,7 @@ export const getAll = unstable_cache(
     return { message, data };
   },
   ['all'],
-  { tags: ['all'], revalidate: 1800 },
+  { tags: ['all'], revalidate: 1000 },
 );
 
 export const getSingle = unstable_cache(
@@ -71,7 +75,7 @@ export const getSingle = unstable_cache(
     return { message, data };
   },
   ['unique'],
-  { tags: ['unique'], revalidate: 1800 },
+  { tags: ['unique'], revalidate: 1000 },
 );
 
 export const createNewProduct = async (
@@ -83,13 +87,17 @@ export const createNewProduct = async (
   try {
     const rawData = Object.fromEntries(formData);
     const validated = validationWithZod(productSchema, rawData);
+    const image = formData.get('image') as File;
+    const validatedImage = validationWithZod(imageSchema, { image: image });
+    const fullPath = await uploadImage(validatedImage.image);
     await db.product.create({
       data: {
         ...validated,
-        image: '../../app/favicon.ico',
+        image: fullPath,
         clerkId: user.id,
       },
     });
+    revalidateTag('all');
     return { message: 'created' };
   } catch (error) {
     return catchError(error);

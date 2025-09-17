@@ -1,7 +1,6 @@
 'use client';
 import { actionFunction } from '@/lib/types/formTypes';
-import { useEffect } from 'react';
-import { useFormState } from 'react-dom';
+import { useActionState, useEffect } from 'react';
 
 const FormContainer = ({
   action,
@@ -13,7 +12,7 @@ const FormContainer = ({
   const initialState = {
     message: '',
   };
-  const [state, formAction] = useFormState(action, initialState);
+  const [state, formAction] = useActionState(action, initialState);
   useEffect(() => {
     console.log(state.message);
   }, [state]);

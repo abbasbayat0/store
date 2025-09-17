@@ -26,15 +26,13 @@ export const productSchema = z.object({
 });
 
 const imageFn = () => {
-  const maxImageSize = 1024 * 1024;
-  const acceptedFileType = ['image/'];
   return z
     .instanceof(File)
     .refine((file) => {
-      return !file || file.size <= maxImageSize;
+      return !file || file.size <= 1024 * 1024;
     }, 'image size must be under 1MB')
     .refine((file) => {
-      return !file || acceptedFileType.some((type) => file.type.startsWith(type));
+      return !file || file.type.startsWith('image/');
     }, 'selected file must be an image');
 };
 export const imageSchema = z.object({
