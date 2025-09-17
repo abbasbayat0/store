@@ -1,4 +1,4 @@
-'use cient';
+'use client';
 import { useLinkStatus } from 'next/link';
 import { VscCode } from 'react-icons/vsc';
 
