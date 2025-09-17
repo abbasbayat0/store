@@ -4,7 +4,6 @@ import { redirect } from 'next/navigation';
 import db from './prisma';
 import { Product } from '@prisma/client';
 import { revalidateTag, unstable_cache } from 'next/cache';
-import { raw } from '@prisma/client/runtime/library';
 import { catchError } from './errorCatch';
 import { getUser } from './getUser';
 import { imageSchema, productSchema, validationWithZod } from './zodSchema';
@@ -87,9 +86,11 @@ export const createNewProduct = async (
   try {
     const rawData = Object.fromEntries(formData);
     const validated = validationWithZod(productSchema, rawData);
+
     const image = formData.get('image') as File;
     const validatedImage = validationWithZod(imageSchema, { image: image });
     const fullPath = await uploadImage(validatedImage.image);
+
     await db.product.create({
       data: {
         ...validated,
