@@ -4,7 +4,7 @@ import { VscCode } from 'react-icons/vsc';
 
 const LogoLoadingIndicator = () => {
   const { pending } = useLinkStatus();
-  return <VscCode className={`text-xl text-white ${pending && 'animate-pulse'}`} />;
+  return <VscCode className={`text-xl text-white ${pending && 'animate-pulse cursor-not-allowed'}`} />;
 };
 
 export default LogoLoadingIndicator;
