@@ -17,7 +17,7 @@ const DarkModeDropdown = ({
       className={`absolute top-9 left-0 flex w-36 flex-col items-start justify-around gap-1 rounded-md border-none bg-white px-2 py-2 shadow-md shadow-gray-300 transition duration-300 sm:w-28 lg:w-32 xl:w-36 dark:border dark:border-gray-800 dark:bg-gray-950 dark:shadow-gray-900`}
     >
       {links.map((link) => {
-        if (id !== process.env.ADMIN_ID && link.label === 'dashboard') return null;
+        if (id !== process.env.NEXT_PUBLIC_ADMIN_ID && link.label === 'dashboard') return null;
         return (
           <div
             key={link.label}

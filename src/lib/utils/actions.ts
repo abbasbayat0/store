@@ -5,7 +5,7 @@ import db from './prisma';
 import { Product } from '@prisma/client';
 import { revalidateTag, unstable_cache } from 'next/cache';
 import { catchError } from './errorCatch';
-import { getUser } from './getUser';
+import { getAdmin, getUser } from './getUser';
 import { imageSchema, productSchema, validationWithZod } from './zodSchema';
 import { uploadImage } from './supabase';
 
@@ -104,3 +104,25 @@ export const createNewProduct = async (
     return catchError(error);
   }
 };
+
+export const getAdminProducts = unstable_cache(
+  async () => {
+    const user = getAdmin();
+    if (!user) redirect('/');
+    let data: Product[] = [];
+    let message = '';
+    try {
+      data = await db.product.findMany({
+        orderBy: {
+          createdAt: 'desc',
+        },
+      });
+      message = `success, you have ${data.length} products`;
+    } catch (error) {
+      message = `failed because of ${error}`;
+    }
+    return { message, data };
+  },
+  ['adminProducts'],
+  { tags: ['adminProducts'], revalidate: 1000 },
+);
