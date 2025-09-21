@@ -107,7 +107,7 @@ export const createNewProduct = async (
 
 export const getAdminProducts = unstable_cache(
   async () => {
-    const user = getAdmin();
+    const user = await getAdmin();
     if (!user) redirect('/');
     let data: Product[] = [];
     let message = '';
