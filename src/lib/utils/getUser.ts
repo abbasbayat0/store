@@ -9,7 +9,6 @@ export const getUser = async () => {
 
 export const getAdmin = async () => {
   const user = await getUser();
-  console.log(user.id)
   if (user.id !== process.env.NEXT_PUBLIC_ADMIN_ID) redirect('/');
   return user;
 };
