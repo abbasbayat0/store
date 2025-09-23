@@ -7,7 +7,13 @@ const page = async () => {
     console.log(message);
     return <EmptyList text='No Products Exist' />;
   }
-  return <div className='min-h-screen'></div>;
+  return (
+    <div className='min-h-screen'>
+      {data.map((item) => {
+        return <div key={item.id}>{item.name}</div>;
+      })}
+    </div>
+  );
 };
 
 export default page;
