@@ -3,14 +3,14 @@ import { getAdminProducts } from '@/lib/utils/actions';
 
 const page = async () => {
   const { data, message } = await getAdminProducts();
-  if (!data) {
+  if (data.length === 0) {
     console.log(message);
     return <EmptyList text='No Products Exist' />;
   }
   return (
     <div className='min-h-screen'>
       {data.map((item) => {
-        return <div key={item.id}>{item.name}1</div>;
+        return <div key={item.id}>{item.name}</div>;
       })}
     </div>
   );
