@@ -106,8 +106,6 @@ export const createNewProduct = async (
 };
 
 export const getAdminProducts = async () => {
-  const user = await getAdmin();
-  if (!user) redirect('/');
   let data: Product[] = [];
   let message = '';
   try {

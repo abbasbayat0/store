@@ -10,7 +10,7 @@ const page = async () => {
   return (
     <div className='min-h-screen'>
       {data.map((item) => {
-        return <div key={item.id}>{item.name}</div>;
+        return <div key={item.id}>{item.name}1</div>;
       })}
     </div>
   );
