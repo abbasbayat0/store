@@ -1,4 +1,4 @@
-const AdminProductsButtons = ({ type }: { type: string }) => {
+const AdminProductsButtons = ({ type }: { type: "edit"|"delete" }) => {
   return <div>AdminProductsButtons</div>;
 };
 
