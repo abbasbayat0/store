@@ -10,7 +10,12 @@ const page = async () => {
   return (
     <div className='min-h-screen'>
       {data.map((item) => {
-        return <div key={item.id}>{item.name}</div>;
+        return <div key={item.id}>
+          <table>
+            <caption>All Products</caption>
+            
+          </table>
+        </div>;
       })}
     </div>
   );
