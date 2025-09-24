@@ -13,9 +13,10 @@ const page = async () => {
         <caption>All Products</caption>
         <thead>
           <tr>
-            <th>name</th>
-            <th>company</th>
-            <th></th>
+            <th>Name</th>
+            <th>Company</th>
+            <th>Price</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
