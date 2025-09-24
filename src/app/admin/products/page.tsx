@@ -9,14 +9,22 @@ const page = async () => {
   }
   return (
     <div className='min-h-screen'>
-      {data.map((item) => {
-        return <div key={item.id}>
-          <table>
-            <caption>All Products</caption>
-            
-          </table>
-        </div>;
-      })}
+      <table className='w-full'>
+        <caption>All Products</caption>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>company</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((item) => {
+            return <div key={item.id}></div>;
+          })}
+        </tbody>
+        <tfoot></tfoot>
+      </table>
     </div>
   );
 };
