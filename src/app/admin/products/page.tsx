@@ -1,6 +1,7 @@
 import EmptyList from '@/components/shared/global/EmptyList';
 import { getAdminProducts } from '@/lib/utils/actions';
 import Link from 'next/link';
+import AdminProductsButtons from '../../../components/shared/form/AdminProductsButtons';
 
 const page = async () => {
   const { data, message } = await getAdminProducts();
@@ -41,9 +42,9 @@ const page = async () => {
               <p className='min-w-1/4 text-center font-semibold transition duration-300 dark:text-white'>
                 {product.price}
               </p>
-              <div className='flex min-w-1/4 items-center justify-center gap-2'>
-                <p>1</p>
-                <p>2</p>
+              <div className='flex min-w-1/4 items-center justify-center gap-3'>
+                <AdminProductsButtons type='edit' />
+                <AdminProductsButtons type='delete' />
               </div>
             </div>
           );
