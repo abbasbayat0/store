@@ -1,11 +1,12 @@
 import EmptyList from '@/components/shared/global/EmptyList';
 import { getAdminProducts } from '@/lib/utils/actions';
 import Link from 'next/link';
-import AdminProductsButtons from '../../../components/shared/form/AdminProductsButtons';
 import { formatCurrency } from '@/lib/utils/format';
+import AdminActionsForm from '@/components/shared/form/AdminActionsForm';
+import AdminProductsButtons from '@/components/shared/form/AdminProductsButtons';
 
 const page = async () => {
-  const { message, data } = await getAdminProducts();
+  const { data, message } = await getAdminProducts();
   if (data.length === 0) {
     console.log(message);
     return <EmptyList text='No Products Exist' />;
@@ -44,8 +45,8 @@ const page = async () => {
                 {formatCurrency(product.price)}
               </p>
               <div className='flex min-w-1/4 items-center justify-center gap-3'>
+                <AdminActionsForm id={product.id} />
                 <AdminProductsButtons type='edit' id={product.id} />
-                <AdminProductsButtons type='delete' id={product.id} />
               </div>
             </div>
           );
