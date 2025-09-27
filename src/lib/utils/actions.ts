@@ -126,6 +126,7 @@ export const getAdminProducts = unstable_cache(
 );
 
 export const deleteProduct = async (id: string) => {
+  console.log("first")
   await getAdmin();
   try {
     await db.product.delete({

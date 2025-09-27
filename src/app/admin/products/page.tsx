@@ -1,5 +1,5 @@
 import EmptyList from '@/components/shared/global/EmptyList';
-import { getAdminProducts } from '@/lib/utils/actions';
+import { deleteProduct, getAdminProducts } from '@/lib/utils/actions';
 import Link from 'next/link';
 import AdminProductsButtons from '../../../components/shared/form/AdminProductsButtons';
 import { formatCurrency } from '@/lib/utils/format';
