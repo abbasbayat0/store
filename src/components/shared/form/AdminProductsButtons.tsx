@@ -3,15 +3,28 @@ import { useFormStatus } from 'react-dom';
 import { GrRefresh } from 'react-icons/gr';
 import { CiEdit } from 'react-icons/ci';
 import { LuTrash2 } from 'react-icons/lu';
+import { deleteProduct } from '@/lib/utils/actions';
 
-const AdminProductsButtons = ({ type }: { type: 'edit' | 'delete' }) => {
+const AdminProductsButtons = ({ type, id }: { type: 'edit' | 'delete'; id: string }) => {
   const { pending } = useFormStatus();
   const buttonIcon = () => {
     switch (type) {
       case 'edit':
-        return <CiEdit className='text-lg hover:scale-110 transition duration-300 dark:text-white cursor-pointer' />;
+        return (
+          <CiEdit
+            className='cursor-pointer text-lg transition duration-300 hover:scale-110 dark:text-white'
+            onClick={() => {}}
+          />
+        );
       case 'delete':
-        return <LuTrash2 className='text-lg opacity-80 hover:scale-110 transition duration-300 dark:text-white cursor-pointer' />;
+        return (
+          <LuTrash2
+            className='cursor-pointer text-lg opacity-80 transition duration-300 hover:scale-110 dark:text-white'
+            onClick={() => {
+              deleteProduct(id);
+            }}
+          />
+        );
       default:
         const never: never = type;
         throw new Error(`invalid type ${never}`);

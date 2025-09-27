@@ -2,9 +2,10 @@ import EmptyList from '@/components/shared/global/EmptyList';
 import { getAdminProducts } from '@/lib/utils/actions';
 import Link from 'next/link';
 import AdminProductsButtons from '../../../components/shared/form/AdminProductsButtons';
+import { Product } from '@prisma/client';
 
 const page = async () => {
-  const { data, message } = await getAdminProducts();
+  const { message, data } = await getAdminProducts();
   if (data.length === 0) {
     console.log(message);
     return <EmptyList text='No Products Exist' />;
@@ -43,8 +44,8 @@ const page = async () => {
                 {product.price}
               </p>
               <div className='flex min-w-1/4 items-center justify-center gap-3'>
-                <AdminProductsButtons type='edit' />
-                <AdminProductsButtons type='delete' />
+                <AdminProductsButtons type='edit' id={product.id} />
+                <AdminProductsButtons type='delete' id={product.id} />
               </div>
             </div>
           );

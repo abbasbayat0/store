@@ -106,22 +106,30 @@ export const createNewProduct = async (
   }
 };
 
-export const getAdminProducts = unstable_cache(
-  async () => {
-    let data: Product[] = [];
-    let message = '';
-    try {
-      data = await db.product.findMany({
-        orderBy: {
-          createdAt: 'desc',
-        },
-      });
-      message = `success, you have ${data.length} products`;
-    } catch (error) {
-      message = `failed because of ${error}`;
-    }
-    return { message, data };
-  },
-  ['adminProducts'],
-  { tags: ['adminProducts'], revalidate: 1000 },
-);
+export const getAdminProducts = async () => {
+  let data: Product[] = [];
+  let message = '';
+  try {
+    data = await db.product.findMany({
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+    message = `success, you have ${data.length} products`;
+  } catch (error) {
+    return catchError(error);
+  }
+  return { message, data };
+};
+
+export const deleteProduct = async (id: string) => {
+  await getAdmin();
+  try {
+    await db.product.delete({
+      where: { id: id },
+    });
+  } catch (error) {
+    return catchError(error);
+  }
+  redirect('/admin/products');
+};
