@@ -4,6 +4,7 @@ import { GrRefresh } from 'react-icons/gr';
 import { CiEdit } from 'react-icons/ci';
 import { LuTrash2 } from 'react-icons/lu';
 import { deleteProduct } from '@/lib/utils/actions';
+import Link from 'next/link';
 
 const AdminProductsButtons = ({ type, id }: { type: 'edit' | 'delete'; id: string }) => {
   const { pending } = useFormStatus();
@@ -11,10 +12,9 @@ const AdminProductsButtons = ({ type, id }: { type: 'edit' | 'delete'; id: strin
     switch (type) {
       case 'edit':
         return (
-          <CiEdit
-            className='cursor-pointer text-lg transition duration-300 hover:scale-110 dark:text-white'
-            onClick={() => {}}
-          />
+          <Link href={`/admin/create/${id}`}>
+            <CiEdit className='cursor-pointer text-lg transition duration-300 hover:scale-110 dark:text-white' />
+          </Link>
         );
       case 'delete':
         return (

@@ -2,7 +2,7 @@ import EmptyList from '@/components/shared/global/EmptyList';
 import { getAdminProducts } from '@/lib/utils/actions';
 import Link from 'next/link';
 import AdminProductsButtons from '../../../components/shared/form/AdminProductsButtons';
-import { Product } from '@prisma/client';
+import { formatCurrency } from '@/lib/utils/format';
 
 const page = async () => {
   const { message, data } = await getAdminProducts();
@@ -10,6 +10,7 @@ const page = async () => {
     console.log(message);
     return <EmptyList text='No Products Exist' />;
   }
+  console.log(data);
   return (
     <div className='min-h-screen'>
       <header className='w-full border-b border-gray-300 pb-3'>
@@ -41,7 +42,7 @@ const page = async () => {
                 {product.company}
               </p>
               <p className='min-w-1/4 text-center font-semibold transition duration-300 dark:text-white'>
-                {product.price}
+                {formatCurrency(product.price)}
               </p>
               <div className='flex min-w-1/4 items-center justify-center gap-3'>
                 <AdminProductsButtons type='edit' id={product.id} />

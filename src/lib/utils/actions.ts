@@ -8,7 +8,6 @@ import { catchError } from './errorCatch';
 import { getAdmin, getUser } from './getUser';
 import { imageSchema, productSchema, validationWithZod } from './zodSchema';
 import { uploadImage } from './supabase';
-import { currentUser } from '@clerk/nextjs/server';
 
 export const getFeatured = unstable_cache(
   async () => {
@@ -106,21 +105,25 @@ export const createNewProduct = async (
   }
 };
 
-export const getAdminProducts = async () => {
-  let data: Product[] = [];
-  let message = '';
-  try {
-    data = await db.product.findMany({
-      orderBy: {
-        createdAt: 'desc',
-      },
-    });
-    message = `success, you have ${data.length} products`;
-  } catch (error) {
-    return catchError(error);
-  }
-  return { message, data };
-};
+export const getAdminProducts = unstable_cache(
+  async () => {
+    let data: Product[] = [];
+    let message = '';
+    try {
+      data = await db.product.findMany({
+        orderBy: {
+          createdAt: 'desc',
+        },
+      });
+      message = `success, you have ${data.length} products`;
+    } catch (error) {
+      return catchError(error);
+    }
+    return { message, data };
+  },
+  ['adminProducts'],
+  { tags: ['adminProducts'], revalidate: 1000 },
+);
 
 export const deleteProduct = async (id: string) => {
   await getAdmin();
@@ -128,8 +131,10 @@ export const deleteProduct = async (id: string) => {
     await db.product.delete({
       where: { id: id },
     });
+    console.log('deleted');
   } catch (error) {
     return catchError(error);
   }
+  revalidateTag('adminProducts');
   redirect('/admin/products');
 };
