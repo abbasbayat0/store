@@ -7,7 +7,7 @@ import { revalidateTag, unstable_cache } from 'next/cache';
 import { catchError } from './errorCatch';
 import { getAdmin, getUser } from './getUser';
 import { imageSchema, productSchema, validationWithZod } from './zodSchema';
-import { uploadImage } from './supabase';
+import { deleteImage, uploadImage } from './supabase';
 
 export const getFeatured = unstable_cache(
   async () => {
@@ -26,8 +26,8 @@ export const getFeatured = unstable_cache(
     }
     return { message, data };
   },
-  ['featured'],
-  { tags: ['featured', 'all'], revalidate: 1000 },
+  ['featured', 'all'],
+  { tags: ['featured'], revalidate: 120 },
 );
 
 export const getAll = unstable_cache(
@@ -53,7 +53,7 @@ export const getAll = unstable_cache(
     return { message, data };
   },
   ['all'],
-  { tags: ['all'], revalidate: 1000 },
+  { tags: ['all'], revalidate: 120 },
 );
 
 export const getSingle = unstable_cache(
@@ -74,7 +74,7 @@ export const getSingle = unstable_cache(
     return { message, data };
   },
   ['unique'],
-  { tags: ['unique'], revalidate: 1000 },
+  { tags: ['unique'], revalidate: 120 },
 );
 
 export const createNewProduct = async (
@@ -105,36 +105,34 @@ export const createNewProduct = async (
   }
 };
 
-export const getAdminProducts = unstable_cache(
-  async () => {
-    let data: Product[] = [];
-    let message = '';
-    try {
-      data = await db.product.findMany({
-        orderBy: {
-          createdAt: 'desc',
-        },
-      });
-      message = `success, you have ${data.length} products`;
-    } catch (error) {
-      return catchError(error);
-    }
-    return { message, data };
-  },
-  ['adminProducts'],
-  { tags: ['adminProducts'], revalidate: 1000 },
-);
-
-export const deleteProduct = async (id: string) => {
-  await getAdmin();
+export const getAdminProducts = unstable_cache(async () => {
+  let data: Product[] = [];
+  let message = '';
   try {
-    await db.product.delete({
-      where: { id: id },
+    data = await db.product.findMany({
+      orderBy: {
+        createdAt: 'desc',
+      },
     });
-    console.log('deleted');
+    message = `success, you have ${data.length} products`;
   } catch (error) {
     return catchError(error);
   }
-  revalidateTag('adminProducts');
-  revalidateTag('all');
+  return { message, data };
+}, ['adminProducts', 'all']);
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const deleteProduct = async (prevState: any) => {
+  console.log(`id is ${prevState.id}`);
+  await getAdmin();
+  try {
+    const data = await db.product.delete({
+      where: { id: prevState.id },
+    });
+    await deleteImage(data.image);
+    revalidateTag('all');
+    return { message: 'deleted' };
+  } catch (error) {
+    return catchError(error);
+  }
 };
