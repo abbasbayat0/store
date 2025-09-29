@@ -3,7 +3,7 @@
 import { redirect } from 'next/navigation';
 import db from './prisma';
 import { Product } from '@prisma/client';
-import { revalidateTag, unstable_cache } from 'next/cache';
+import { revalidatePath, revalidateTag, unstable_cache } from 'next/cache';
 import { catchError } from './errorCatch';
 import { getAdmin, getUser } from './getUser';
 import { imageSchema, productSchema, validationWithZod } from './zodSchema';
@@ -99,6 +99,7 @@ export const createNewProduct = async (
       },
     });
     revalidateTag('all');
+    revalidatePath('/admin/products');
     return { message: 'created' };
   } catch (error) {
     return catchError(error);
