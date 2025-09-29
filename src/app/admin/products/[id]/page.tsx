@@ -2,6 +2,7 @@ import Button from '@/components/shared/form/Button';
 import CheckboxInput from '@/components/shared/form/CheckedInput';
 import FormContainer from '@/components/shared/form/FormContainer';
 import FormInput from '@/components/shared/form/FormInput';
+import ImageInput from '@/components/shared/form/ImageInput';
 import PriceInput from '@/components/shared/form/PriceInput';
 import TextArea from '@/components/shared/form/TextArea';
 import EmptyList from '@/components/shared/global/EmptyList';
@@ -31,6 +32,22 @@ const AdminEditProducts = async ({ params }: { params: Promise<{ id: string }> }
         </div>
         <div className='mt-5 flex flex-col items-center justify-between sm:flex-row'>
           <PriceInput defaultValue={data.price} />
+          {/* <ImageInput /> */}
+          <div className={`flex flex-col`}>
+            <label
+              htmlFor='image'
+              className={`font-medium transition duration-300 dark:text-white`}
+            >
+              Image
+            </label>
+            <input
+              type='file'
+              name='image'
+              id='image'
+              className={`mt-1 w-48 rounded-md border border-gray-300 px-2 py-1 opacity-50 transition duration-300 focus:opacity-100 focus:shadow-sm focus:outline-none min-[400px]:w-52 min-[500px]:w-64 sm:w-44 md:w-52 lg:w-96 dark:border-gray-800 dark:text-white`}
+              accept='image/*'
+            />
+          </div>
         </div>
         <TextArea
           name='description'
@@ -44,7 +61,7 @@ const AdminEditProducts = async ({ params }: { params: Promise<{ id: string }> }
           name='featured'
           className='mt-5'
         />
-        <Button />
+        <Button text='Update' />
       </FormContainer>
     </div>
   );

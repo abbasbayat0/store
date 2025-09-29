@@ -88,7 +88,7 @@ export const createNewProduct = async (
     const validated = validationWithZod(productSchema, rawData);
 
     const image = formData.get('image') as File;
-    const validatedImage = validationWithZod(imageSchema, { image: image });
+    const validatedImage = validationWithZod(imageSchema, { image });
     const fullPath = await uploadImage(validatedImage.image);
 
     await db.product.create({
@@ -140,14 +140,36 @@ export const updateProduct = async (prevState: Product, formData: FormData) => {
   await getAdmin();
   try {
     const id = formData.get('id') as string;
-    const rawData = Object.fromEntries(formData);
+    const name = formData.get('name') as string;
+    const company = formData.get('company') as string;
+    const price = formData.get('price') as string;
+    const featured = formData.get('featured') as string;
+    const description = formData.get('description') as string;
+    const rawData = { id, name, company, price, description, featured };
     const validated = validationWithZod(productSchema, rawData);
-    await db.product.update({
+
+    const data = await db.product.update({
       where: { id: id },
       data: { ...validated },
     });
+    const image = formData.get('image') as File;
+    let fullPath = null;
+    if (image.size) {
+      await deleteImage(data.image);
+      const validatedImage = validationWithZod(imageSchema, { image });
+      fullPath = await uploadImage(validatedImage.image);
+    }
+    if (fullPath) {
+      await db.product.update({
+        where: { id: id },
+        data: { image: fullPath },
+      });
+    }
     revalidateTag('all');
     revalidatePath(`/admin/products/${id}`);
+    revalidatePath(`/admin/products`);
+    revalidatePath(`/products`);
+    revalidatePath(`/`);
     return { message: 'updated' };
   } catch (error) {
     return catchError(error);
