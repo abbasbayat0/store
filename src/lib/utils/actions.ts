@@ -122,9 +122,7 @@ export const getAdminProducts = unstable_cache(async () => {
   return { message, data };
 }, ['adminProducts', 'all']);
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const deleteProduct = async (prevState: any) => {
-  console.log(`id is ${prevState.id}`);
+export const deleteProduct = async (prevState: Product) => {
   await getAdmin();
   try {
     const data = await db.product.delete({
@@ -136,4 +134,10 @@ export const deleteProduct = async (prevState: any) => {
   } catch (error) {
     return catchError(error);
   }
+};
+
+export const updateProduct = async (prevState: Product, formData: FormData) => {
+  await getAdmin();
+  const id = formData.get('id');
+  return { message: 'created' };
 };
