@@ -3,7 +3,7 @@
 import { redirect } from 'next/navigation';
 import db from './prisma';
 import { Product } from '@prisma/client';
-import { revalidatePath, revalidateTag, unstable_cache } from 'next/cache';
+import { revalidateTag, unstable_cache } from 'next/cache';
 import { catchError } from './errorCatch';
 import { getAdmin, getUser } from './getUser';
 import { imageSchema, productSchema, validationWithZod } from './zodSchema';
@@ -26,8 +26,8 @@ export const getFeatured = unstable_cache(
     }
     return { message, data };
   },
-  ['featured', 'all'],
-  { tags: ['featured'], revalidate: 120 },
+  ['featured'],
+  { tags: ['featured', 'all'] },
 );
 
 export const getAll = unstable_cache(
@@ -53,7 +53,7 @@ export const getAll = unstable_cache(
     return { message, data };
   },
   ['all'],
-  { tags: ['all'], revalidate: 120 },
+  { tags: ['all'] },
 );
 
 export const getSingle = unstable_cache(
@@ -74,7 +74,7 @@ export const getSingle = unstable_cache(
     return { message, data };
   },
   ['unique'],
-  { tags: ['unique'], revalidate: 120 },
+  { tags: ['unique', 'all'] },
 );
 
 export const createNewProduct = async (
@@ -99,28 +99,31 @@ export const createNewProduct = async (
       },
     });
     revalidateTag('all');
-    revalidatePath('/admin/products');
     return { message: 'created' };
   } catch (error) {
     return catchError(error);
   }
 };
 
-export const getAdminProducts = unstable_cache(async () => {
-  let data: Product[] = [];
-  let message = '';
-  try {
-    data = await db.product.findMany({
-      orderBy: {
-        createdAt: 'desc',
-      },
-    });
-    message = `success, you have ${data.length} products`;
-  } catch (error) {
-    return catchError(error);
-  }
-  return { message, data };
-}, ['adminProducts', 'all']);
+export const getAdminProducts = unstable_cache(
+  async () => {
+    let data: Product[] = [];
+    let message = '';
+    try {
+      data = await db.product.findMany({
+        orderBy: {
+          createdAt: 'desc',
+        },
+      });
+      message = `success, you have ${data.length} products`;
+    } catch (error) {
+      return catchError(error);
+    }
+    return { message, data };
+  },
+  ['adminProducts'],
+  { tags: ['adminProducts', 'all'] },
+);
 
 export const deleteProduct = async (prevState: Product) => {
   await getAdmin();
@@ -140,12 +143,9 @@ export const updateProduct = async (prevState: Product, formData: FormData) => {
   await getAdmin();
   try {
     const id = formData.get('id') as string;
-    const name = formData.get('name') as string;
-    const company = formData.get('company') as string;
-    const price = formData.get('price') as string;
-    const featured = formData.get('featured') as string;
-    const description = formData.get('description') as string;
-    const rawData = { id, name, company, price, description, featured };
+    const rawData = Object.fromEntries(formData);
+    delete rawData.image;
+    console.log(rawData);
     const validated = validationWithZod(productSchema, rawData);
 
     const data = await db.product.update({
@@ -166,10 +166,6 @@ export const updateProduct = async (prevState: Product, formData: FormData) => {
       });
     }
     revalidateTag('all');
-    revalidatePath(`/admin/products/${id}`);
-    revalidatePath(`/admin/products`);
-    revalidatePath(`/products`);
-    revalidatePath(`/`);
     return { message: 'updated' };
   } catch (error) {
     return catchError(error);
