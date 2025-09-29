@@ -138,6 +138,18 @@ export const deleteProduct = async (prevState: Product) => {
 
 export const updateProduct = async (prevState: Product, formData: FormData) => {
   await getAdmin();
-  const id = formData.get('id');
-  return { message: 'created' };
+  try {
+    const id = formData.get('id') as string;
+    const rawData = Object.fromEntries(formData);
+    const validated = validationWithZod(productSchema, rawData);
+    await db.product.update({
+      where: { id: id },
+      data: { ...validated },
+    });
+    revalidateTag('all');
+    revalidatePath(`/admin/products/${id}`);
+    return { message: 'updated' };
+  } catch (error) {
+    return catchError(error);
+  }
 };
