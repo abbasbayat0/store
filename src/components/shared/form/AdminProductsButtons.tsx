@@ -30,7 +30,13 @@ const AdminProductsButtons = ({
     }
   };
   return (
-    <button type='submit'>{pending ? <GrRefresh className='animate-spin' /> : buttonIcon()}</button>
+    <button type='submit'>
+      {pending ? (
+        <GrRefresh className='animate-spin cursor-not-allowed dark:text-white' />
+      ) : (
+        buttonIcon()
+      )}
+    </button>
   );
 };
 
