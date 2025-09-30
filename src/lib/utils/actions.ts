@@ -106,7 +106,7 @@ export const createNewProduct = async (
 };
 
 export const getAdminProducts = unstable_cache(
-  async () => {
+  async (): Promise<{ message: string; data: Product[] }> => {
     let data: Product[] = [];
     let message = '';
     try {
@@ -117,7 +117,7 @@ export const getAdminProducts = unstable_cache(
       });
       message = `success, you have ${data.length} products`;
     } catch (error) {
-      return catchError(error);
+      return { ...catchError(error), data };
     }
     return { message, data };
   },
@@ -125,7 +125,7 @@ export const getAdminProducts = unstable_cache(
   { tags: ['adminProducts', 'all'] },
 );
 
-export const deleteProduct = async (prevState: Product) => {
+export const deleteProduct = async (prevState: {id:string}) => {
   await getAdmin();
   try {
     const data = await db.product.delete({

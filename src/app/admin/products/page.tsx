@@ -6,8 +6,8 @@ import AdminActionsForm from '@/components/shared/form/AdminActionsForm';
 import AdminProductsButtons from '@/components/shared/form/AdminProductsButtons';
 
 const page = async () => {
-  const { data, message } = await getAdminProducts();
-  if (data.length === 0) {
+  const { message, data } = await getAdminProducts();
+  if (data.length === 0 || !data) {
     console.log(message);
     return <EmptyList text='No Products Exist' />;
   }
@@ -30,18 +30,18 @@ const page = async () => {
           return (
             <div
               key={product.id}
-              className='mt-2 flex w-full items-center justify-around border-b border-gray-300 pb-1 gap-1'
+              className='mt-2 flex w-full items-center justify-around gap-1 border-b border-gray-300 pb-1'
             >
               <Link
                 href={`/products/${product.id}`}
-                className='min-w-1/4 text-center font-semibold underline opacity-70 transition duration-300 hover:opacity-90 dark:text-white text-xs sm:text-base'
+                className='min-w-1/4 text-center text-xs font-semibold underline opacity-70 transition duration-300 hover:opacity-90 sm:text-base dark:text-white'
               >
                 {product.name}
               </Link>
-              <p className='min-w-1/4 text-center font-semibold transition duration-300 dark:text-white text-xs sm:text-base'>
+              <p className='min-w-1/4 text-center text-xs font-semibold transition duration-300 sm:text-base dark:text-white'>
                 {product.company}
               </p>
-              <p className='min-w-1/4 text-center font-semibold transition duration-300 dark:text-white text-xs sm:text-base'>
+              <p className='min-w-1/4 text-center text-xs font-semibold transition duration-300 sm:text-base dark:text-white'>
                 {formatCurrency(product.price)}
               </p>
               <div className='flex min-w-1/4 items-center justify-center gap-3'>
