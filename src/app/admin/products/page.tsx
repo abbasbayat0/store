@@ -30,18 +30,18 @@ const page = async () => {
           return (
             <div
               key={product.id}
-              className='mt-2 flex w-full items-center justify-around border-b border-gray-300 pb-1'
+              className='mt-2 flex w-full items-center justify-around border-b border-gray-300 pb-1 gap-1'
             >
               <Link
                 href={`/products/${product.id}`}
-                className='min-w-1/4 text-center font-semibold underline opacity-70 transition duration-300 hover:opacity-90 dark:text-white'
+                className='min-w-1/4 text-center font-semibold underline opacity-70 transition duration-300 hover:opacity-90 dark:text-white text-xs sm:text-base'
               >
                 {product.name}
               </Link>
-              <p className='min-w-1/4 text-center font-semibold transition duration-300 dark:text-white'>
+              <p className='min-w-1/4 text-center font-semibold transition duration-300 dark:text-white text-xs sm:text-base'>
                 {product.company}
               </p>
-              <p className='min-w-1/4 text-center font-semibold transition duration-300 dark:text-white'>
+              <p className='min-w-1/4 text-center font-semibold transition duration-300 dark:text-white text-xs sm:text-base'>
                 {formatCurrency(product.price)}
               </p>
               <div className='flex min-w-1/4 items-center justify-center gap-3'>
