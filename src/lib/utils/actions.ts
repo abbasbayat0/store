@@ -212,3 +212,20 @@ export const toggleFavoriteAction = async (prevState: {
     catchError(error);
   }
 };
+
+export const fetchFavorites = async () => {
+  const { id } = await getUser();
+  try {
+    const favoriteProducts = await db.favorite.findMany({
+      where: {
+        clerkId: id,
+      },
+      include: {
+        product: true,
+      },
+    });
+    return favoriteProducts;
+  } catch (error) {
+    console.log(error);
+  }
+};
