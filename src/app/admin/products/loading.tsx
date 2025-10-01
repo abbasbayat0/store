@@ -1,4 +1,4 @@
-const loading = () => {
+const Loading = () => {
   return (
     <div className='min-h-screen'>
       <header className='w-full border-b border-gray-300 pb-3'>
@@ -35,4 +35,4 @@ const loading = () => {
   );
 };
 
-export default loading;
+export default Loading;
