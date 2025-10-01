@@ -2,7 +2,7 @@ import EmptyList from '@/components/shared/global/EmptyList';
 import { getAdminProducts } from '@/lib/utils/actions';
 import Link from 'next/link';
 import { formatCurrency } from '@/lib/utils/format';
-import AdminActionsForm from '@/components/shared/form/AdminActionsForm';
+import AdminDeleteForm from '@/components/shared/form/AdminDeleteForm';
 import AdminProductsButtons from '@/components/shared/form/AdminProductsButtons';
 
 const page = async () => {
@@ -45,7 +45,7 @@ const page = async () => {
                 {formatCurrency(product.price)}
               </p>
               <div className='flex min-w-1/4 items-center justify-center gap-3'>
-                <AdminActionsForm id={product.id} />
+                <AdminDeleteForm id={product.id} />
                 <AdminProductsButtons type='edit' id={product.id} />
               </div>
             </div>
