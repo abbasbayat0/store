@@ -3,7 +3,7 @@
 import { redirect } from 'next/navigation';
 import db from './prisma';
 import { Product } from '@prisma/client';
-import { revalidateTag, unstable_cache } from 'next/cache';
+import { revalidatePath, revalidateTag, unstable_cache } from 'next/cache';
 import { catchError } from './errorCatch';
 import { getAdmin, getUser } from './getUser';
 import { imageSchema, productSchema, validationWithZod } from './zodSchema';
@@ -191,5 +191,24 @@ export const toggleFavoriteAction = async (prevState: {
   favoriteId: string | null;
   pathName: string;
 }) => {
-  return { message: 'toggle favorite action' };
+  const user = await getUser();
+  const { productId, favoriteId, pathName } = prevState;
+  try {
+    if (favoriteId) {
+      await db.favorite.delete({
+        where: { id: favoriteId },
+      });
+    } else {
+      await db.favorite.create({
+        data: {
+          productId,
+          clerkId: user.id,
+        },
+      });
+    }
+    revalidatePath(pathName);
+    return { message: 'toggle favorite action' };
+  } catch (error) {
+    catchError(error);
+  }
 };
