@@ -4,6 +4,8 @@ import ProductsGrid from './ProductsGrid';
 import ProductsList from './ProductsList';
 import NoMatchedProducts from '@/components/ui/NoMatchedProducts';
 import ProductsTitle from '@/components/ui/ProductsTitle';
+import { Suspense } from 'react';
+import LoadingContainer from '../global/LoadingContainer';
 
 const ProductsContainer = async ({ layout, search }: { layout: string; search: string }) => {
   const searchTerms = search ? `&search=${search}` : '';
@@ -23,9 +25,13 @@ const ProductsContainer = async ({ layout, search }: { layout: string; search: s
         {productsLength === 0 ? (
           <NoMatchedProducts message={message} />
         ) : layout === 'grid' ? (
-          <ProductsGrid data={data} />
+          <Suspense fallback={<LoadingContainer />}>
+            <ProductsGrid data={data} />
+          </Suspense>
         ) : (
-          <ProductsList data={data} />
+          <Suspense fallback={<LoadingContainer />}>
+            <ProductsList data={data} />
+          </Suspense>
         )}
       </div>
     </>
