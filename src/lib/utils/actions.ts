@@ -125,7 +125,7 @@ export const getAdminProducts = unstable_cache(
   { tags: ['adminProducts', 'all'] },
 );
 
-export const deleteProduct = async (prevState: {id:string}) => {
+export const deleteProduct = async (prevState: { id: string }) => {
   await getAdmin();
   try {
     const data = await db.product.delete({
@@ -170,4 +170,26 @@ export const updateProduct = async (prevState: Product, formData: FormData) => {
   } catch (error) {
     return catchError(error);
   }
+};
+
+export const fetchFavoriteId = async ({ productId }: { productId: string }) => {
+  const user = await getUser();
+  const favoriteId = await db.favorite.findFirst({
+    where: {
+      productId,
+      clerkId: user.id,
+    },
+    select: {
+      id: true,
+    },
+  });
+  return favoriteId?.id || null;
+};
+
+export const toggleFavoriteAction = async (prevState: {
+  productId: string;
+  favoriteId: string | null;
+  pathName: string;
+}) => {
+  return { message: 'toggle favorite action' };
 };
