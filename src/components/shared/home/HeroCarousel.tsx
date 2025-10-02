@@ -35,8 +35,7 @@ const HeroCarousel = () => {
               className={`absolute flex h-11/12 w-11/12 items-center justify-center rounded-md border border-gray-300 lg:rounded-xl ${goRight && 'left-[130%]'} ${goLeft && '-left-[130%]'} ${!goLeft && !goRight && 'left-7'} transition-all duration-900 ease-out dark:border-gray-700`}
             >
               <Image
-                width={450}
-                height={650}
+                fill
                 src={item.src.src}
                 alt={item.src.src}
                 className='h-[97%] w-[98%] rounded-md object-cover lg:rounded-lg'
