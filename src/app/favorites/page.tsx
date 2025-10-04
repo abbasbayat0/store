@@ -1,3 +1,4 @@
+import EmptyList from '@/components/shared/global/EmptyList';
 import LoadingContainer from '@/components/shared/global/LoadingContainer';
 import SectionTitle from '@/components/shared/global/SectionTitle';
 import Cart from '@/components/ui/Cart';
@@ -6,6 +7,7 @@ import { Suspense } from 'react';
 
 const page = async () => {
   const favoriteProducts = await fetchFavorites();
+  if (favoriteProducts?.length === 0) return <EmptyList text='There Is No Favorite Item' />;
   return (
     <div>
       <SectionTitle title='Favorites' />
