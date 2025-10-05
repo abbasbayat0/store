@@ -5,7 +5,6 @@ import { LuUserRound } from 'react-icons/lu';
 
 const UserIcon = () => {
   const { user } = useUser();
-  console.log(user?.imageUrl);
   return (
     <div className='flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 overflow-hidden'>
       {user ? (

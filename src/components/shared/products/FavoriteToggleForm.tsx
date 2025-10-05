@@ -15,8 +15,7 @@ const FavoriteToggleForm = ({
 }) => {
   const pathName = usePathname();
   const action = toggleFavoriteAction.bind(null, { productId, favoriteId, pathName });
-  const [state, formAction, pending] = useActionState(action, { message: '' });
-  console.log(state?.message);
+  const [, formAction, pending] = useActionState(action, { message: '' });
   const isFavorite = favoriteId ? true : false;
   return (
     <form action={formAction}>
