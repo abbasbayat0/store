@@ -7,7 +7,12 @@ import { Suspense } from 'react';
 
 const page = async () => {
   const favoriteProducts = await fetchFavorites();
-  if (favoriteProducts?.length === 0) return <EmptyList text='There Is No Favorite Item' />;
+  if (favoriteProducts?.length === 0)
+    return (
+      <Suspense fallback={<p className='dark:text-white'>loading ...</p>}>
+        <EmptyList text='There Is No Favorite Item' />
+      </Suspense>
+    );
   return (
     <div>
       <SectionTitle title='Favorites' />
