@@ -7,7 +7,7 @@
     "start": "next start",
     "lint": "next lint",
     "build": "npx prisma generate && next build",
-    "postinstall": "pnpm approve-builds --yes"
+    "postinstall": "pnpm approve-builds"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.31.10",
