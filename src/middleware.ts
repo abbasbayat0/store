@@ -1,32 +1,20 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 
-const isPublicRoute = createRouteMatcher([
-  '/sign-in(.*)',
-  '/sign-up(.*)',
-  '/products(.*)',
-  '/about',
-]);
-
+const isPublicRoute = createRouteMatcher(['/', '/products(.*)', '/about']);
 const isAdminRoute = createRouteMatcher(['/admin(.*)']);
 
 export default clerkMiddleware(async (auth, req) => {
   const { userId } = await auth();
-  if (req.nextUrl.pathname === '/') {
-    if (!userId) {
-      return NextResponse.next();
-    }
-  }
+  const isAdminUser = userId === process.env.NEXT_PUBLIC_ADMIN_ID;
 
-  if (!isPublicRoute(req)) {
-    await auth.protect();
-  }
-
-  if (isAdminRoute(req) && userId !== process.env.NEXT_PUBLIC_ADMIN_ID) {
+  if (isAdminRoute(req) && !isAdminUser) {
     return NextResponse.redirect(new URL('/', req.url));
   }
+
+  if (!isPublicRoute(req)) auth.protect();
 });
 
 export const config = {
-  matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
+  matcher: ['/((?!.*\\..*|_next).*)', '/', '/(api|trpc)(.*)'],
 };

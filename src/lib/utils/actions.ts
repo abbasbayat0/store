@@ -82,7 +82,7 @@ export const createNewProduct = async (
   prevState: any,
   formData: FormData,
 ): Promise<{ message: string }> => {
-  const user = await getUser();
+  const user = await getAdmin();
   try {
     const rawData = Object.fromEntries(formData);
     const validated = validationWithZod(productSchema, rawData);
@@ -177,7 +177,7 @@ export const fetchFavoriteId = async ({ productId }: { productId: string }) => {
   const favoriteId = await db.favorite.findFirst({
     where: {
       productId,
-      clerkId: user.id,
+      clerkId: user?.id,
     },
     select: {
       id: true,
