@@ -2,7 +2,6 @@ import Button from '@/components/shared/form/Button';
 import CheckboxInput from '@/components/shared/form/CheckedInput';
 import FormContainer from '@/components/shared/form/FormContainer';
 import FormInput from '@/components/shared/form/FormInput';
-import ImageInput from '@/components/shared/form/ImageInput';
 import PriceInput from '@/components/shared/form/PriceInput';
 import TextArea from '@/components/shared/form/TextArea';
 import EmptyList from '@/components/shared/global/EmptyList';
@@ -32,7 +31,6 @@ const AdminEditProducts = async ({ params }: { params: Promise<{ id: string }> }
         </div>
         <div className='mt-5 flex flex-col items-center justify-between sm:flex-row'>
           <PriceInput defaultValue={data.price} />
-          {/* <ImageInput /> */}
           <div className={`flex flex-col`}>
             <label
               htmlFor='image'
