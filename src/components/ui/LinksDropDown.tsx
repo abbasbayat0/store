@@ -1,8 +1,7 @@
 import Link from 'next/link';
 import { Dispatch, SetStateAction } from 'react';
-import SignOut from '../shared/navbar/SignOut';
 import type { NavLink } from '@/assets/links';
-import { useUser } from '@clerk/nextjs';
+import { SignOutButton, useUser } from '@clerk/nextjs';
 
 const DarkModeDropdown = ({
   setDropOpen,
@@ -35,7 +34,11 @@ const DarkModeDropdown = ({
           </div>
         );
       })}
-      <SignOut />
+      <SignOutButton>
+        <Link href='/' className='mx-2 my-2 text-sm font-bold opacity-70'>
+          Sign Out
+        </Link>
+      </SignOutButton>
     </div>
   );
 };

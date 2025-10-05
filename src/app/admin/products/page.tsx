@@ -5,7 +5,7 @@ import { formatCurrency } from '@/lib/utils/format';
 import AdminDeleteForm from '@/components/shared/form/AdminDeleteForm';
 import AdminProductsButtons from '@/components/shared/form/AdminProductsButtons';
 import { Suspense } from 'react';
-import Loading from './Loading';
+import Loading from './LoadingOne';
 
 const page = async () => {
   const { message, data } = await getAdminProducts();
