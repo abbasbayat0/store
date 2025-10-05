@@ -6,6 +6,7 @@ import { useActionState } from 'react';
 const AdminDeleteForm = ({ id }: { id: string }) => {
   const deleteOne = deleteProduct.bind(null, { id });
   const [state, formAction, pending] = useActionState(deleteOne, { message: '' });
+  console.log(state);
 
   return (
     <form action={formAction}>
