@@ -8,7 +8,7 @@ type FormInputProps = {
 const TextArea = ({ name, labelText, defaultValue, className }: FormInputProps) => {
   return (
     <div className={`flex flex-col ${className}`}>
-      <label htmlFor={name} className={`font-medium transition duration-300 dark:text-white`}>
+      <label htmlFor={name} className={`font-medium transition duration-300 dark:text-white capitalize`}>
         {labelText || name}
       </label>
       <textarea
