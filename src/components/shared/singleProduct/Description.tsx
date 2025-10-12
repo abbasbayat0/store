@@ -14,7 +14,7 @@ const Description = ({ id, name, company, price, description }: Product) => {
         </p>
         <div className='flex gap-2'>
           <FavoriteToggleButton id={id} />
-          <SingleProductShareButton />
+          <SingleProductShareButton id={id} name={name} />
         </div>
       </div>
       <p className={`mt-2 transition duration-300 dark:text-white`}>rating</p>
