@@ -3,6 +3,8 @@ import Description from '@/components/shared/singleProduct/Description';
 import { getSingle } from '@/lib/utils/actions';
 import EmptyList from '@/components/shared/global/EmptyList';
 import Image from 'next/image';
+import ProductReviews from '@/components/shared/reviews/ProductReviews';
+import SubmitReview from '@/components/shared/reviews/SubmitReview';
 
 const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
@@ -29,6 +31,8 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
           </div>
           <Description {...data} />
         </div>
+        <ProductReviews />
+        <SubmitReview />
       </div>
     );
 };
