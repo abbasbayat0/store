@@ -229,3 +229,12 @@ export const fetchFavorites = async () => {
     console.log(error);
   }
 };
+
+export const createReviewAction = async (prevState: unknown, formData: FormData) => {
+  return { message: `${Object.fromEntries(formData)} added` };
+};
+export const fetchProductReviews = async () => {};
+export const fetchProductReviewsByUser = async () => {};
+export const deleteReviewAction = async () => {};
+export const findExistingReviews = async () => {};
+export const fetchProductRating = async () => {};
