@@ -226,16 +226,17 @@ export const fetchFavorites = async () => {
     });
     return favoriteProducts;
   } catch (error) {
-    console.log(error);
+    catchError(error);
   }
 };
 
-export const createReviewAction = async (
-  userData: { id: string; name: string; image: string },
-  prevState: { message: string },
-  formData: FormData,
-) => {
-  return { message: `${userData.name} added` };
+export const createReviewAction = async (prevState: unknown, formData: FormData) => {
+  const user = await getUser();
+  try {
+    return { message: `${formData.get('name')}added` };
+  } catch (error) {
+    catchError(error);
+  }
 };
 export const fetchProductReviews = async () => {};
 export const fetchProductReviewsByUser = async () => {};

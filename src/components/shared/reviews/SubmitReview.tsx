@@ -10,13 +10,8 @@ import TextArea from '../form/TextArea';
 const SubmitReview = () => {
   const [showForm, setShowForm] = useState(false);
   const { user } = useUser();
-  const finalAction = createReviewAction.bind(null, {
-    id: user?.id as string,
-    name: user?.firstName as string,
-    image: user?.imageUrl as string,
-  });
-  const [state, formAction, pending] = useActionState(finalAction, { message: '' });
-  console.log(state.message);
+  const [state, formAction, pending] = useActionState(createReviewAction, { message: '' });
+  console.log(state?.message);
   return (
     <div>
       {user ? (
@@ -40,6 +35,14 @@ const SubmitReview = () => {
         action={formAction}
         className={`${!showForm && 'hidden'} mt-10 rounded-lg border border-gray-300 p-5 dark:border-gray-800`}
       >
+        <input type='hidden' name='id' id='id' defaultValue={user?.id} />
+        <input
+          type='hidden'
+          name='authorName'
+          id='authorName'
+          defaultValue={user?.firstName as string}
+        />
+        <input type='hidden' name='image' id='image' defaultValue={user?.imageUrl} />
         <RatingInput />
         <TextArea className='mt-5' name='comment' defaultValue='enter your comment here' />
         <button
