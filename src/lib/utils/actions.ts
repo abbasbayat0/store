@@ -230,8 +230,12 @@ export const fetchFavorites = async () => {
   }
 };
 
-export const createReviewAction = async (prevState: unknown, formData: FormData) => {
-  return { message: `${Object.fromEntries(formData)} added` };
+export const createReviewAction = async (
+  userData: { id: string; name: string; image: string },
+  prevState: { message: string },
+  formData: FormData,
+) => {
+  return { message: `${userData.name} added` };
 };
 export const fetchProductReviews = async () => {};
 export const fetchProductReviewsByUser = async () => {};
