@@ -233,13 +233,48 @@ export const fetchFavorites = async () => {
 export const createReviewAction = async (prevState: unknown, formData: FormData) => {
   const user = await getUser();
   try {
-    return { message: `${formData.get('name')}added` };
+    return { message: `${formData.get('authorName')} added` };
   } catch (error) {
     catchError(error);
   }
 };
-export const fetchProductReviews = async () => {};
-export const fetchProductReviewsByUser = async () => {};
-export const deleteReviewAction = async () => {};
-export const findExistingReviews = async () => {};
-export const fetchProductRating = async () => {};
+export const fetchProductReviews = async () => {
+  const user = await getUser();
+  try {
+    return { message: `fetchProductReviews` };
+  } catch (error) {
+    catchError(error);
+  }
+};
+export const fetchProductReviewsByUser = async () => {
+  const user = await getUser();
+  try {
+    return { message: `fetchProductReviewsByUser` };
+  } catch (error) {
+    catchError(error);
+  }
+};
+export const deleteReviewAction = async () => {
+  const user = await getUser();
+  try {
+    return { message: `deleteReviewAction` };
+  } catch (error) {
+    catchError(error);
+  }
+};
+export const findExistingReviews = async () => {
+  const user = await getUser();
+  try {
+    return { message: `findExistingReviews` };
+  } catch (error) {
+    catchError(error);
+  }
+};
+export const fetchProductRating = async () => {
+  const user = await getUser();
+  try {
+    return { message: `fetchProductRating` };
+  } catch (error) {
+    catchError(error);
+  }
+};
