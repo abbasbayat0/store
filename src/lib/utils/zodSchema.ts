@@ -1,5 +1,5 @@
+import { File } from 'buffer';
 import { z, ZodSchema } from 'zod';
-
 export const productSchema = z.object({
   name: z
     .string()
@@ -15,7 +15,7 @@ export const productSchema = z.object({
     message: 'price must be a positive number.',
   }),
   description: z.string().refine(
-    (description) => {
+    (description: string) => {
       const wordCount = description.split(' ').length;
       return wordCount >= 10 && wordCount <= 1000;
     },
@@ -28,10 +28,10 @@ export const productSchema = z.object({
 const imageFn = () => {
   return z
     .instanceof(File)
-    .refine((file) => {
+    .refine((file: File) => {
       return !file || file.size <= 1024 * 1024;
     }, 'image size must be under 1MB')
-    .refine((file) => {
+    .refine((file: File) => {
       return !file || file.type.startsWith('image/');
     }, 'selected file must be an image');
 };
@@ -48,13 +48,13 @@ export const validationWithZod = <T>(schema: ZodSchema<T>, data: unknown): T => 
 };
 
 export const reviewSchema = z.object({
-  productId: z.string().refine((value) => value !== '', {
+  productId: z.string().refine((value: string) => value !== '', {
     message: 'Product ID cannot be empty',
   }),
-  authorName: z.string().refine((value) => value !== '', {
+  authorName: z.string().refine((value: string) => value !== '', {
     message: 'Author name cannot be empty',
   }),
-  authorImageUrl: z.string().refine((value) => value !== '', {
+  authorImageUrl: z.string().refine((value: string) => value !== '', {
     message: 'Author image URL cannot be empty',
   }),
   rating: z.coerce
