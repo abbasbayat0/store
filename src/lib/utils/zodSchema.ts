@@ -1,4 +1,3 @@
-import { File } from 'buffer';
 import { z, ZodSchema } from 'zod';
 export const productSchema = z.object({
   name: z
@@ -27,13 +26,18 @@ export const productSchema = z.object({
 
 const imageFn = () => {
   return z
-    .instanceof(File)
+    .custom<File>((val) => {
+      return (
+        val instanceof File ||
+        (typeof val === 'object' && val !== null && 'size' in val && 'type' in val && 'name' in val)
+      );
+    })
     .refine((file: File) => {
       return !file || file.size <= 1024 * 1024;
     }, 'image size must be under 1MB')
     .refine((file: File) => {
-      return !file || file.type.startsWith('image/');
-    }, 'selected file must be an image');
+      return file && file.type.startsWith('image/');
+    }, 'File must be an image');
 };
 export const imageSchema = z.object({
   image: imageFn(),
