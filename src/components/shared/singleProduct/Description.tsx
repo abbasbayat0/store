@@ -2,6 +2,7 @@ import { Product } from '@prisma/client';
 import FavoriteToggleButton from '../products/FavoriteToggleButton';
 import SingleProductShareButton from '@/components/ui/SingleProductShareButton';
 import { formatCurrency } from '@/lib/utils/format';
+import Rating from '../reviews/Rating';
 
 const Description = ({ id, name, company, price, description }: Product) => {
   return (
@@ -17,7 +18,9 @@ const Description = ({ id, name, company, price, description }: Product) => {
           <SingleProductShareButton id={id} name={name} />
         </div>
       </div>
-      <p className={`mt-2 transition duration-300 dark:text-white`}>rating</p>
+      <div className={`mt-2 transition duration-300 dark:text-white`}>
+        <Rating productId={id} />
+      </div>
       <p className={`font- mt-5 text-xl capitalize transition duration-300 dark:text-white`}>
         {company}
       </p>

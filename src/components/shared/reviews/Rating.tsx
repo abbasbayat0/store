@@ -1,5 +1,34 @@
-const Rating = () => {
-  return <div>Rating</div>;
+import { fetchProductRating } from '@/lib/utils/actions';
+import { FaStar } from 'react-icons/fa';
+import { FaRegStar } from 'react-icons/fa';
+
+const Rating = async ({ productId }: { productId: string }) => {
+  const { message, data } = await fetchProductRating(productId);
+  console.log(message);
+  let total = 0;
+  data.forEach((item) => (total += item.rating));
+  const ratingCount = data.length;
+  const rating = total / ratingCount;
+  const stars = [...Array(5).fill(0)];
+  let starsCount = 0;
+  const newStars = stars.map((star) => {
+    if (starsCount !== Number(rating.toFixed())) {
+      starsCount += 1;
+      return 1;
+    }
+    return star;
+  });
+
+  return (
+    <p className='flex items-center gap-2'>
+      {newStars.map((star, index) => {
+        console.log(star);
+        if (star === 1) return <FaStar key={index} />;
+        return <FaRegStar key={index} />;
+      })}
+      ({ratingCount} reviews)
+    </p>
+  );
 };
 
 export default Rating;
