@@ -32,7 +32,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
           <Description {...data} />
         </div>
         <ProductReviews />
-        <SubmitReview />
+        <SubmitReview productId={data.id} />
       </div>
     );
 };
