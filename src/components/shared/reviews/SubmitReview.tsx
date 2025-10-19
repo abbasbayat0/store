@@ -7,7 +7,7 @@ import { GrRefresh } from 'react-icons/gr';
 import RatingInput from './RatingInput';
 import TextArea from '../form/TextArea';
 
-const SubmitReview = () => {
+const SubmitReview = ({ productId }: { productId: string }) => {
   const [showForm, setShowForm] = useState(false);
   const { user } = useUser();
   const [state, formAction, pending] = useActionState(createReviewAction, { message: '' });
@@ -35,14 +35,19 @@ const SubmitReview = () => {
         action={formAction}
         className={`${!showForm && 'hidden'} mt-10 rounded-lg border border-gray-300 p-5 dark:border-gray-800`}
       >
-        <input type='hidden' name='id' id='id' defaultValue={user?.id} />
+        <input type='hidden' name='productId' id='productId' defaultValue={productId} />
         <input
           type='hidden'
           name='authorName'
           id='authorName'
           defaultValue={user?.firstName as string}
         />
-        <input type='hidden' name='image' id='image' defaultValue={user?.imageUrl} />
+        <input
+          type='hidden'
+          name='authorImageUrl'
+          id='authorImageUrl'
+          defaultValue={user?.imageUrl}
+        />
         <RatingInput />
         <TextArea className='mt-5' name='comment' defaultValue='enter your comment here' />
         <button

@@ -6,7 +6,7 @@ import { Product } from '@prisma/client';
 import { revalidatePath, revalidateTag, unstable_cache } from 'next/cache';
 import { catchError } from './errorCatch';
 import { getAdmin, getUser } from './getUser';
-import { imageSchema, productSchema, validationWithZod } from './zodSchema';
+import { imageSchema, productSchema, reviewSchema, validationWithZod } from './zodSchema';
 import { deleteImage, uploadImage } from './supabase';
 
 export const getFeatured = unstable_cache(
@@ -233,7 +233,15 @@ export const fetchFavorites = async () => {
 export const createReviewAction = async (prevState: unknown, formData: FormData) => {
   const user = await getUser();
   try {
-    return { message: `${formData.get('authorName')} added` };
+    const rawData = Object.fromEntries(formData);
+    const validatedData = validationWithZod(reviewSchema, rawData);
+    await db.review.create({
+      data: {
+        ...validatedData,
+        clerkId: user.id,
+      },
+    });
+    return { message: `review added` };
   } catch (error) {
     catchError(error);
   }
