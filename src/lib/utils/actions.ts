@@ -241,6 +241,7 @@ export const createReviewAction = async (prevState: unknown, formData: FormData)
         clerkId: user.id,
       },
     });
+    revalidatePath(`/products/${rawData.productId}`);
     return { message: `review added` };
   } catch (error) {
     catchError(error);
