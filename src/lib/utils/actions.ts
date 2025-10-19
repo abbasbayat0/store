@@ -247,6 +247,26 @@ export const createReviewAction = async (prevState: unknown, formData: FormData)
     catchError(error);
   }
 };
+export const fetchProductRating = async (productId: string) => {
+  const user = await getUser();
+  let message = '';
+  let data: { rating: number }[] = [];
+  try {
+    const rating = await db.review.findMany({
+      where: {
+        productId,
+      },
+      select: {
+        rating: true,
+      },
+    });
+    message = 'successfully received';
+    data = rating;
+    return { message, data };
+  } catch (error) {
+    return { message: catchError(error), data };
+  }
+};
 export const fetchProductReviews = async () => {
   const user = await getUser();
   try {
@@ -275,14 +295,6 @@ export const findExistingReviews = async () => {
   const user = await getUser();
   try {
     return { message: `findExistingReviews` };
-  } catch (error) {
-    catchError(error);
-  }
-};
-export const fetchProductRating = async () => {
-  const user = await getUser();
-  try {
-    return { message: `fetchProductRating` };
   } catch (error) {
     catchError(error);
   }
