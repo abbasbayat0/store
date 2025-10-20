@@ -22,7 +22,6 @@ const Rating = async ({ productId }: { productId: string }) => {
   return (
     <p className='flex items-center gap-2'>
       {newStars.map((star, index) => {
-        console.log(star);
         if (star === 1) return <FaStar key={index} />;
         return <FaRegStar key={index} />;
       })}
