@@ -248,7 +248,7 @@ export const createReviewAction = async (prevState: unknown, formData: FormData)
   }
 };
 export const fetchProductRating = async (productId: string) => {
-  const user = await getUser();
+  await getUser();
   let message = '';
   let data: { rating: number }[] = [];
   try {
@@ -258,6 +258,7 @@ export const fetchProductRating = async (productId: string) => {
       },
       select: {
         rating: true,
+        comment: true,
       },
     });
     message = 'successfully received';
