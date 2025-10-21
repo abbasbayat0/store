@@ -31,7 +31,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
           </div>
           <Description {...data} />
         </div>
-        <ProductReviews />
+        <ProductReviews productId={data.id} />
         <SubmitReview productId={data.id} />
       </div>
     );
