@@ -250,7 +250,7 @@ export const createReviewAction = async (prevState: unknown, formData: FormData)
 export const fetchProductRating = async (productId: string) => {
   await getUser();
   let message = '';
-  let data: { rating: number }[] = [];
+  let data: { rating: number; comment: string; authorImageUrl: string }[] = [];
   try {
     const rating = await db.review.findMany({
       where: {
@@ -259,6 +259,7 @@ export const fetchProductRating = async (productId: string) => {
       select: {
         rating: true,
         comment: true,
+        authorImageUrl: true,
       },
     });
     message = 'successfully received';
