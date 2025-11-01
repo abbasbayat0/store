@@ -14,6 +14,13 @@ const nextConfig = {
         port: '',
       },
       { protocol: 'https', hostname: 'ryjoygwqwacktrgswajj.supabase.co' },
+      { protocol: 'https', hostname: 'img.clerk.com', port: '', pathname: '/**' },
+      {
+        protocol: 'https',
+        hostname: 'images.clerk.dev',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
 };
