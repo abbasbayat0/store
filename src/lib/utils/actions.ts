@@ -2,7 +2,7 @@
 
 import { redirect } from 'next/navigation';
 import db from './prisma';
-import { Product } from '@prisma/client';
+import { Product, Review } from '@prisma/client';
 import { revalidatePath, revalidateTag, unstable_cache } from 'next/cache';
 import { catchError } from './errorCatch';
 import { getAdmin, getUser } from './getUser';
@@ -250,7 +250,7 @@ export const createReviewAction = async (prevState: unknown, formData: FormData)
 export const fetchProductRating = async (productId: string) => {
   await getUser();
   let message = '';
-  let data: { rating: number; comment: string; authorImageUrl: string }[] = [];
+  let data: { rating: number }[] = [];
   try {
     const rating = await db.review.findMany({
       where: {
@@ -258,8 +258,6 @@ export const fetchProductRating = async (productId: string) => {
       },
       select: {
         rating: true,
-        comment: true,
-        authorImageUrl: true,
       },
     });
     message = 'successfully received';
@@ -269,12 +267,30 @@ export const fetchProductRating = async (productId: string) => {
     return { message: catchError(error), data };
   }
 };
-export const fetchProductReviews = async () => {
-  const user = await getUser();
+export const fetchProductReviews = async (productId: string) => {
+  await getUser();
+  let message = '';
+  let data: { rating: number; authorImageUrl: string; comment: string; authorName: string }[] = [];
   try {
-    return { message: `fetchProductReviews` };
+    const rating = await db.review.findMany({
+      where: {
+        productId,
+      },
+      select: {
+        rating: true,
+        authorImageUrl: true,
+        comment: true,
+        authorName: true,
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+    message = 'successfully received';
+    data = rating;
+    return { message, data };
   } catch (error) {
-    catchError(error);
+    return { message: catchError(error), data };
   }
 };
 export const fetchProductReviewsByUser = async () => {
