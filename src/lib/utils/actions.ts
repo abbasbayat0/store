@@ -293,12 +293,21 @@ export const fetchProductReviews = async (productId: string) => {
     return { message: catchError(error), data };
   }
 };
-export const fetchProductReviewsByUser = async () => {
-  const user = await getUser();
+export const fetchProductRatingByProductId = async (authorName: string) => {
+  await getUser();
+  let message = '';
+  let data = null;
   try {
-    return { message: `fetchProductReviewsByUser` };
+    data = await db.review.findFirst({
+      where: { authorName },
+      select: {
+        rating: true,
+      },
+    });
+    message = 'success';
+    return { message, data };
   } catch (error) {
-    catchError(error);
+    return { message: catchError(error), data };
   }
 };
 export const deleteReviewAction = async () => {
