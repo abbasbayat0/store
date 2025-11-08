@@ -1,10 +1,8 @@
-import { fetchProductRating } from '@/lib/utils/actions';
+
 import { FaStar } from 'react-icons/fa';
 import { FaRegStar } from 'react-icons/fa';
 
-const Rating = async ({ productId }: { productId: string }) => {
-  const { message, data } = await fetchProductRating(productId);
-  console.log(message);
+const Rating = async ({ data }: { data: {rating:number}[] }) => {
   let total = 0;
   data.forEach((item) => (total += item.rating));
   const ratingCount = data.length;
@@ -25,7 +23,7 @@ const Rating = async ({ productId }: { productId: string }) => {
         if (star === 1) return <FaStar key={index} />;
         return <FaRegStar key={index} />;
       })}
-      ({ratingCount} reviews)
+      {data.length>1 && `${ratingCount} reviews`}
     </p>
   );
 };
