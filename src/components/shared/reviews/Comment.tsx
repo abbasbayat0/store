@@ -13,7 +13,7 @@ const Comment = ({ comment }: { comment: string }) => {
         <p>{finalComment}</p>
       ) : (
         <p>
-          {finalComment} ...
+          {finalComment} {!show && '...'}
           <br />
           <span
             onClick={() => setShow(!show)}
