@@ -3,8 +3,11 @@ import FavoriteToggleButton from '../products/FavoriteToggleButton';
 import SingleProductShareButton from '@/components/ui/SingleProductShareButton';
 import { formatCurrency } from '@/lib/utils/format';
 import Rating from '../reviews/Rating';
+import { fetchProductRating } from '@/lib/utils/actions';
 
-const Description = ({ id, name, company, price, description }: Product) => {
+const Description = async ({ id, name, company, price, description }: Product) => {
+  const { message, data } = await fetchProductRating(id);
+  console.log(message);
   return (
     <div>
       <div className='mt-16 flex items-center gap-5 min-[480px]:w-[400px] lg:mt-5 lg:min-w-full lg:gap-10'>
@@ -19,7 +22,7 @@ const Description = ({ id, name, company, price, description }: Product) => {
         </div>
       </div>
       <div className={`mt-2 transition duration-300 dark:text-white`}>
-        <Rating productId={id} />
+        <Rating data={data} />
       </div>
       <p className={`font- mt-5 text-xl capitalize transition duration-300 dark:text-white`}>
         {company}
