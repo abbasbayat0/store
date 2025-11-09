@@ -335,7 +335,7 @@ export const deleteReviewAction = async (prevState: { reviewId: string }) => {
   }
 };
 export const findExistingReviews = async () => {
-  const user = await getUser();
+  await getUser();
   try {
     return { message: `findExistingReviews` };
   } catch (error) {
