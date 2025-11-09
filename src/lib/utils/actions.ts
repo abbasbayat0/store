@@ -298,7 +298,7 @@ export const fetchProductReviewByUser = async () => {
   let message = '';
   let data = null;
   try {
-    data = await db.review.findFirst({
+    data = await db.review.findMany({
       where: { clerkId: user?.id },
       select: {
         id: true,
@@ -318,9 +318,16 @@ export const fetchProductReviewByUser = async () => {
     return { message: catchError(error), data };
   }
 };
-export const deleteReviewAction = async () => {
+export const deleteReviewAction = async (prevState: { reviewId: string }) => {
   const user = await getUser();
+  const { reviewId } = prevState;
   try {
+    await db.review.delete({
+      where: {
+        id: reviewId,
+        clerkId: user?.id,
+      },
+    });
     return { message: `deleteReviewAction` };
   } catch (error) {
     catchError(error);

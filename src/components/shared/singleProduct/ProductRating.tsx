@@ -18,7 +18,7 @@ const Rating = async ({ data }: { data: {rating:number}[] }) => {
   });
 
   return (
-    <p className='flex items-center gap-2'>
+    <p className='flex items-center gap-2 dark:text-white'>
       {newStars.map((star, index) => {
         if (star === 1) return <FaStar key={index} />;
         return <FaRegStar key={index} />;

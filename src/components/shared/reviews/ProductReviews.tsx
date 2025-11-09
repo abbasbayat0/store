@@ -15,7 +15,13 @@ const ProductReviews = async ({ productId }: { productId: string }) => {
       <SectionTitle title='Product Reviews' />
       <div className='mt-10 flex flex-wrap justify-around gap-8'>
         {data.map((item, i) => {
-          return <ReviewCard key={i} {...item} />;
+          const info = {
+            rating: item.rating,
+            comment: item.comment,
+            name: item.authorName,
+            image: item.authorImageUrl,
+          };
+          return <ReviewCard key={i} {...info} />;
         })}
       </div>
     </div>
