@@ -2,7 +2,7 @@
 
 import { redirect } from 'next/navigation';
 import db from './prisma';
-import { Product, Review } from '@prisma/client';
+import { Product } from '@prisma/client';
 import { revalidatePath, revalidateTag, unstable_cache } from 'next/cache';
 import { catchError } from './errorCatch';
 import { getAdmin, getUser } from './getUser';
@@ -293,15 +293,23 @@ export const fetchProductReviews = async (productId: string) => {
     return { message: catchError(error), data };
   }
 };
-export const fetchProductRatingByProductId = async (authorName: string) => {
-  await getUser();
+export const fetchProductReviewByUser = async () => {
+  const user = await getUser();
   let message = '';
   let data = null;
   try {
     data = await db.review.findFirst({
-      where: { authorName },
+      where: { clerkId: user?.id },
       select: {
+        id: true,
         rating: true,
+        comment: true,
+        product: {
+          select: {
+            image: true,
+            name: true,
+          },
+        },
       },
     });
     message = 'success';

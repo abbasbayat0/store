@@ -1,20 +1,19 @@
 import Image from 'next/image';
 import Comment from './Comment';
-import { fetchProductRatingByProductId } from '@/lib/utils/actions';
-import Rating from './Rating';
+import Rating from '../singleProduct/ProductRating';
 
 const ReviewCard = async ({
+  rating,
   comment,
   authorImageUrl,
   authorName,
 }: {
+  rating: number;
   comment: string;
   authorImageUrl: string;
   authorName: string;
 }) => {
-  const { message, data } = await fetchProductRatingByProductId(authorName);
-  console.log(message);
-  const sendingShape = [data as { rating: number }];
+  const sendingShape = [{ rating }];
   return (
     <div className='min-w-5/12 rounded-xl border border-gray-100 p-5 shadow-md'>
       <div className='flex items-center gap-3'>

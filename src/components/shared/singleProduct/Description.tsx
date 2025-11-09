@@ -2,7 +2,7 @@ import { Product } from '@prisma/client';
 import FavoriteToggleButton from '../products/FavoriteToggleButton';
 import SingleProductShareButton from '@/components/ui/SingleProductShareButton';
 import { formatCurrency } from '@/lib/utils/format';
-import Rating from '../reviews/Rating';
+import Rating from './ProductRating';
 import { fetchProductRating } from '@/lib/utils/actions';
 
 const Description = async ({ id, name, company, price, description }: Product) => {
