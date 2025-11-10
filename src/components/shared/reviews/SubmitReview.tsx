@@ -1,6 +1,6 @@
 'use client';
 
-import { createReviewAction } from '@/lib/utils/actions';
+import { createReviewAction} from '@/lib/utils/actions';
 import { SignInButton, useUser } from '@clerk/nextjs';
 import { useActionState, useState } from 'react';
 import { GrRefresh } from 'react-icons/gr';
@@ -10,8 +10,8 @@ import TextArea from '../form/TextArea';
 const SubmitReview = ({ productId }: { productId: string }) => {
   const [showForm, setShowForm] = useState(false);
   const { user } = useUser();
-  const [state, formAction, pending] = useActionState(createReviewAction, { message: '' });
-  console.log(state?.message);
+  const [, formAction, pending] = useActionState(createReviewAction, { message: '' });
+
   return (
     <div>
       {user ? (

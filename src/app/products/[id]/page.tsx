@@ -1,10 +1,12 @@
 import BreadCrumbs from '@/components/shared/singleProduct/BreadCrumbs';
 import Description from '@/components/shared/singleProduct/Description';
-import { getSingle } from '@/lib/utils/actions';
+import { findExistingReviews, getSingle } from '@/lib/utils/actions';
 import EmptyList from '@/components/shared/global/EmptyList';
 import Image from 'next/image';
 import ProductReviews from '@/components/shared/reviews/ProductReviews';
 import SubmitReview from '@/components/shared/reviews/SubmitReview';
+import { auth } from '@clerk/nextjs/server';
+import { Review } from '@prisma/client';
 
 const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
@@ -13,7 +15,11 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
     console.log(message);
     return <EmptyList className='mt-20' text='Item Not Found' />;
   }
-  if (data)
+  if (data) {
+    const user = await auth();
+    let isThereAReview: Review | null = null;
+    if (user.userId) isThereAReview = await findExistingReviews(user.userId as string, id);
+
     return (
       <div className='min-h-screen'>
         <BreadCrumbs name={data.name} />
@@ -32,9 +38,10 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
           <Description {...data} />
         </div>
         <ProductReviews productId={data.id} />
-        <SubmitReview productId={data.id} />
+        {!isThereAReview && <SubmitReview productId={data.id} />}
       </div>
     );
+  }
 };
 
 export default page;
