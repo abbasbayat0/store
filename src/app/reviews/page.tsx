@@ -6,7 +6,7 @@ import { fetchProductReviewByUser } from '@/lib/utils/actions';
 
 const page = async () => {
   const { data } = await fetchProductReviewByUser();
-  if (!data) return <EmptyList text='you have no reviews' />;
+  if (!data || data.length === 0) return <EmptyList text='you have no reviews' />;
   return (
     <div>
       <SectionTitle title='your reviews' />
