@@ -6,6 +6,7 @@ import ThemeProvider from '@/components/shared/global/ThemeProvider';
 import AppProvider from '@/components/shared/global/AppProvider';
 
 import { ClerkProvider } from '@clerk/nextjs';
+import Notif from './Notif';
 
 export const metadata: Metadata = {
   title: 'Store',
@@ -22,6 +23,7 @@ export default async function RootLayout({
       <html lang='en'>
         <AppProvider>
           <body>
+            <Notif />
             <ThemeProvider>
               <Navbar />
               <Container className='min-h-screen py-20'>{children}</Container>
