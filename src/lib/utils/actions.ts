@@ -242,6 +242,7 @@ export const createReviewAction = async (prevState: unknown, formData: FormData)
       },
     });
     revalidatePath(`/products/${rawData.productId}`);
+    revalidatePath('/reviews');
     return { message: `review added` };
   } catch (error) {
     catchError(error);
@@ -334,11 +335,11 @@ export const deleteReviewAction = async (prevState: { reviewId: string }) => {
     catchError(error);
   }
 };
-export const findExistingReviews = async () => {
-  await getUser();
-  try {
-    return { message: `findExistingReviews` };
-  } catch (error) {
-    catchError(error);
-  }
+export const findExistingReviews = async (userId: string, productId: string) => {
+  return await db.review.findFirst({
+    where: {
+      clerkId: userId,
+      productId,
+    },
+  });
 };
