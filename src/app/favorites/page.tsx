@@ -17,16 +17,18 @@ const page = async () => {
     <div>
       <SectionTitle title='Favorites' />
       <Suspense fallback={<LoadingContainer />}>
-        {favoriteProducts?.map((product) => {
-          return (
-            <div
-              key={product.id}
-              className='mt-5 flex flex-wrap items-center justify-center gap-10'
-            >
-              <Cart {...product.product} />
-            </div>
-          );
-        })}
+        <div className='mt-5 flex flex-wrap items-center justify-center gap-10'>
+          {favoriteProducts?.map((product) => {
+            return (
+              <div
+                key={product.id}
+                className='mt-5 flex flex-wrap items-center justify-center gap-10'
+              >
+                <Cart {...product.product} />
+              </div>
+            );
+          })}
+        </div>
       </Suspense>
     </div>
   );
