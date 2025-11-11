@@ -6,7 +6,8 @@ const Notif = () => {
   const [show, setShow] = useState<boolean>(true);
 
   useEffect(() => {
-    const guide = JSON.parse(localStorage.getItem('guide'));
+    const guide = JSON.parse(localStorage.getItem('guide') || 'null');
+    console.log(guide);
     if (guide !== null) setShow(guide);
     if (show) document.body.style.overflow = 'hidden';
     else document.body.style.overflow = 'unset';
