@@ -22,7 +22,7 @@ export const getFeatured = unstable_cache(
       });
       message = `success, you have ${data.length} products`;
     } catch (error) {
-      message = `failed because of ${error}`;
+      message = catchError(error).message;
     }
     return { message, data };
   },
