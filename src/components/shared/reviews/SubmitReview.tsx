@@ -1,6 +1,6 @@
 'use client';
 
-import { createReviewAction} from '@/lib/utils/actions';
+import { createReviewAction } from '@/lib/utils/actions';
 import { SignInButton, useUser } from '@clerk/nextjs';
 import { useActionState, useState } from 'react';
 import { GrRefresh } from 'react-icons/gr';
@@ -22,7 +22,7 @@ const SubmitReview = ({ productId }: { productId: string }) => {
           Add Review
         </p>
       ) : (
-        <SignInButton>
+        <SignInButton mode='modal'>
           <p
             title='you are not a user. click to singIn'
             className={`mt-10 flex w-32 cursor-pointer items-center justify-center gap-1 rounded-lg bg-blue-600 px-3 py-2 text-white opacity-70`}

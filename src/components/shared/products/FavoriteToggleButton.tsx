@@ -14,7 +14,7 @@ const FavoriteToggleButton = async ({ id }: { id: string }) => {
       {userId ? (
         <FavoriteToggleForm productId={id} favoriteId={favoriteId} />
       ) : (
-        <SignInButton>
+        <SignInButton mode='modal'>
           <CiHeart className='text-3xl' />
         </SignInButton>
       )}
