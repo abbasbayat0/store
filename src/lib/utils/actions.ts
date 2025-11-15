@@ -343,3 +343,16 @@ export const findExistingReviews = async (userId: string, productId: string) => 
     },
   });
 };
+
+export const fetchCartItems = async () => {
+  const user = await getUser();
+  const cart = await db.cart.findFirst({
+    where: {
+      clerkId: user.id,
+    },
+    select: {
+      numItemsInCart: true,
+    },
+  });
+  return cart || 0
+};
