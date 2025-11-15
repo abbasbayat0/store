@@ -348,11 +348,14 @@ export const fetchCartItems = async () => {
   const user = await getUser();
   const cart = await db.cart.findFirst({
     where: {
-      clerkId: user.id,
+      clerkId: user?.id ?? '',
     },
     select: {
       numItemsInCart: true,
     },
   });
-  return cart || 0
+  return cart?.numItemsInCart || 0;
+};
+export const addToCart = async () => {
+  return { message: 'success' };
 };

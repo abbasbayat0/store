@@ -4,6 +4,7 @@ import SingleProductShareButton from '@/components/ui/SingleProductShareButton';
 import { formatCurrency } from '@/lib/utils/format';
 import Rating from './ProductRating';
 import { fetchProductRating } from '@/lib/utils/actions';
+import AddToCart from './AddToCart';
 
 const Description = async ({ id, name, company, price, description }: Product) => {
   const { message, data } = await fetchProductRating(id);
@@ -35,6 +36,7 @@ const Description = async ({ id, name, company, price, description }: Product) =
       <p className={`mt-8 font-medium opacity-50 transition duration-300 dark:text-white`}>
         {description}
       </p>
+      <AddToCart id={id} />
     </div>
   );
 };
