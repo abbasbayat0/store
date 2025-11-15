@@ -4,11 +4,12 @@ import { addToCart } from '@/lib/utils/actions';
 import { useActionState } from 'react';
 import { GrRefresh } from 'react-icons/gr';
 
-const AddToCartInput = () => {
+const AddToCartInput = ({ id }: { id: string }) => {
   const [state, formAction, pending] = useActionState(addToCart, { message: '' });
-  console.log(state.message)
+  console.log(state.message);
   return (
     <form className='flex flex-col gap-2' action={formAction}>
+      <input type='hidden' name='id' value={id} />
       <label htmlFor='amount'>Amount:</label>
       <input
         type='number'

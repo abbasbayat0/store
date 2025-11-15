@@ -36,7 +36,7 @@ const Description = async ({ id, name, company, price, description }: Product) =
       <p className={`mt-8 font-medium opacity-50 transition duration-300 dark:text-white`}>
         {description}
       </p>
-      <AddToCart id={id} />
+      <AddToCart />
     </div>
   );
 };

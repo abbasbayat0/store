@@ -344,7 +344,7 @@ export const findExistingReviews = async (userId: string, productId: string) => 
   });
 };
 
-export const fetchCartItems = async () => {
+export const fetchNumItemsInCart = async () => {
   const user = await getUser();
   const cart = await db.cart.findFirst({
     where: {
@@ -356,6 +356,7 @@ export const fetchCartItems = async () => {
   });
   return cart?.numItemsInCart || 0;
 };
-export const addToCart = async () => {
+export const addToCart = async (prevState:{message:string}, formData:FormData) => {
+  console.log(formData)
   return { message: 'success' };
 };
