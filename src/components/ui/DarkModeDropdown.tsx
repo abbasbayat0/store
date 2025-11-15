@@ -6,6 +6,11 @@ const DarkModeDropdown = ({ setDropOpen }: { setDropOpen: Dispatch<SetStateActio
   const dispatch = useDispatch();
   return (
     <div
+      onMouseLeave={() => {
+        setTimeout(() => {
+          setDropOpen(false);
+        }, 1000);
+      }}
       className={`absolute right-0 -bottom-[122px] flex w-28 flex-col items-start justify-around gap-2 rounded-md border-none bg-white px-2 py-2 shadow-md shadow-gray-300 dark:border dark:border-gray-800 dark:bg-gray-950 dark:shadow-gray-800`}
     >
       <p
@@ -27,6 +32,8 @@ const DarkModeDropdown = ({ setDropOpen }: { setDropOpen: Dispatch<SetStateActio
       >
         Dark
       </p>
+      <div className='-my-1 w-11/12 border-b border-gray-100 dark:border-gray-800'></div>
+
       <p
         onClick={() => {
           const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
