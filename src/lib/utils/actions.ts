@@ -356,7 +356,13 @@ export const fetchNumItemsInCart = async () => {
   });
   return cart?.numItemsInCart || 0;
 };
-export const addToCart = async (prevState:{message:string}, formData:FormData) => {
-  console.log(formData)
-  return { message: 'success' };
+
+export const addToCart = async (prevState: { message: string }, formData: FormData) => {
+  const user = await getUser();
+  const productId = formData.get('id');
+  const amount = Number(formData.get('amount'));
+  try {
+    
+  } catch (error) {}
+  redirect('/cart');
 };
