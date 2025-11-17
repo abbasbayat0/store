@@ -367,51 +367,51 @@ const findExistingProduct = async (productId: string) => {
   return product;
 };
 
-const fetchOrCreateCart = async ({
-  userId,
-  error = false,
-}: {
-  userId: string;
-  error?: boolean;
-}) => {
-  let cart = await db.cart.findFirst({
-    where: {
-      clerkId: userId,
-    },
-    include: {
-      cartItem: {
-        include: {
-          product: true,
-        },
-      },
-    },
-  });
-  if (!cart && error) throw new Error('not found');
-  if (!cart) {
-    cart = await db.cart.create({
-      data: {
-        clerkId: userId,
-      },
-      include: {
-        cartItem: {
-          include: {
-            product: true,
-          },
-        },
-      },
-    });
-  }
+// const fetchOrCreateCart = async ({
+//   userId,
+//   error = false,
+// }: {
+//   userId: string;
+//   error?: boolean;
+// }) => {
+//   let cart = await db.cart.findFirst({
+//     where: {
+//       clerkId: userId,
+//     },
+//     include: {
+//       cartItem: {
+//         include: {
+//           product: true,
+//         },
+//       },
+//     },
+//   });
+//   if (!cart && error) throw new Error('not found');
+//   if (!cart) {
+//     cart = await db.cart.create({
+//       data: {
+//         clerkId: userId,
+//       },
+//       include: {
+//         cartItem: {
+//           include: {
+//             product: true,
+//           },
+//         },
+//       },
+//     });
+//   }
 
-  return cart;
-};
+//   return cart;
+// };
 
 export const addToCart = async (prevState: { message: string }, formData: FormData) => {
-  const user = await getUser();
+  // const user = await getUser();
   try {
     const productId = formData.get('id') as string;
-    const amount = Number(formData.get('amount'));
+    // const amount = Number(formData.get('amount'));
     await findExistingProduct(productId);
-    const cart = await fetchOrCreateCart({ userId: user.id });
+    // const cart = await fetchOrCreateCart({ userId: user.id });
   } catch (error) {
     catchError(error);
   }
