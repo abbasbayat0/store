@@ -12,19 +12,28 @@ const Notif = () => {
     else document.body.style.overflow = 'unset';
   }, [show]);
 
+  const handleClose = () => {
+    setShow(false);
+    localStorage.setItem('guide', JSON.stringify(false));
+  };
+
   if (show)
     return (
       <div className='fixed inset-0 z-50 h-full w-full'>
         <div
-          onClick={() => {
-            setShow(false);
-            localStorage.setItem('guide', JSON.stringify(false));
-          }}
+          onClick={handleClose}
           className='absolute inset-0 z-40 h-full w-full bg-black/70 backdrop-blur-xs transition-opacity duration-300'
         ></div>
         <div
           className={`absolute top-1/2 left-1/2 z-50 flex h-96 w-96 -translate-x-1/2 -translate-y-1/2 flex-col justify-center gap-4 rounded-2xl border border-gray-700 bg-gray-900/95 px-6 backdrop-blur-md`}
         >
+          <button
+            onClick={handleClose}
+            className='absolute -top-3 -right-3 flex h-8 w-8 items-center justify-center rounded-full border border-gray-600 bg-gray-800 text-gray-300 transition-colors duration-200 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-gray-500 focus:outline-none cursor-pointer'
+          >
+            X
+          </button>
+
           <h1 className='text-2xl font-bold text-white'>Discover More!</h1>
           <p className='leading-relaxed text-gray-200'>
             This website has exclusive pages and features, including a dedicated admin panel. Log in

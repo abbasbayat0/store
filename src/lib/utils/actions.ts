@@ -367,7 +367,13 @@ const findExistingProduct = async (productId: string) => {
   return product;
 };
 
-const fetchOrCreateCart = async ({ userId, error }: { userId: string; error?: boolean }) => {
+const fetchOrCreateCart = async ({
+  userId,
+  error = false,
+}: {
+  userId: string;
+  error?: boolean;
+}) => {
   let cart = await db.cart.findFirst({
     where: {
       clerkId: userId,
@@ -405,6 +411,9 @@ export const addToCart = async (prevState: { message: string }, formData: FormDa
     const productId = formData.get('id') as string;
     const amount = Number(formData.get('amount'));
     await findExistingProduct(productId);
-  } catch (error) {}
+    const cart = await fetchOrCreateCart({ userId: user.id });
+  } catch (error) {
+    catchError(error);
+  }
   redirect('/cart');
 };
