@@ -357,12 +357,22 @@ export const fetchNumItemsInCart = async () => {
   return cart?.numItemsInCart || 0;
 };
 
+const findExistingProduct = async (productId: string) => {
+  const product = await db.product.findUnique({
+    where: {
+      id: productId,
+    },
+  });
+  if (!product) throw new Error('there is no such product');
+  return product;
+};
+
 export const addToCart = async (prevState: { message: string }, formData: FormData) => {
   const user = await getUser();
-  const productId = formData.get('id');
-  const amount = Number(formData.get('amount'));
   try {
-    
+    const productId = formData.get('id') as string;
+    const amount = Number(formData.get('amount'));
+    await findExistingProduct(productId);
   } catch (error) {}
   redirect('/cart');
 };
