@@ -2,13 +2,13 @@ import { SignInButton } from '@clerk/nextjs';
 import { auth } from '@clerk/nextjs/server';
 import AddToCartInput from './AddToCartInput';
 
-const AddToCart = async () => {
+const AddToCart = async ({id}:{id:string}) => {
   const { userId } = await auth();
 
   return (
     <div className='mt-10'>
       {userId ? (
-        <AddToCartInput id={userId} />
+        <AddToCartInput id={id} />
       ) : (
         <div className='flex flex-col gap-2'>
           <label htmlFor='amount'>Amount:</label>
