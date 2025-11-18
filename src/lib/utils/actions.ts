@@ -2,7 +2,7 @@
 
 import { redirect } from 'next/navigation';
 import db from './prisma';
-import { Product } from '@prisma/client';
+import { Cart, Product } from '@prisma/client';
 import { revalidatePath, revalidateTag, unstable_cache } from 'next/cache';
 import { catchError } from './errorCatch';
 import { getAdmin, getUser } from './getUser';
@@ -367,51 +367,116 @@ const findExistingProduct = async (productId: string) => {
   return product;
 };
 
-// const fetchOrCreateCart = async ({
-//   userId,
-//   error = false,
-// }: {
-//   userId: string;
-//   error?: boolean;
-// }) => {
-//   let cart = await db.cart.findFirst({
-//     where: {
-//       clerkId: userId,
-//     },
-//     include: {
-//       cartItem: {
-//         include: {
-//           product: true,
-//         },
-//       },
-//     },
-//   });
-//   if (!cart && error) throw new Error('not found');
-//   if (!cart) {
-//     cart = await db.cart.create({
-//       data: {
-//         clerkId: userId,
-//       },
-//       include: {
-//         cartItem: {
-//           include: {
-//             product: true,
-//           },
-//         },
-//       },
-//     });
-//   }
+const fetchOrCreateCart = async ({
+  userId,
+  error = false,
+}: {
+  userId: string;
+  error?: boolean;
+}) => {
+  let cart = await db.cart.findFirst({
+    where: {
+      clerkId: userId,
+    },
+    include: {
+      cartItem: {
+        include: {
+          product: true,
+        },
+      },
+    },
+  });
+  if (!cart && error) throw new Error('not found');
+  if (!cart) {
+    cart = await db.cart.create({
+      data: {
+        clerkId: userId,
+      },
+      include: {
+        cartItem: {
+          include: {
+            product: true,
+          },
+        },
+      },
+    });
+  }
 
-//   return cart;
-// };
+  return cart;
+};
+
+const updateOrCreateCartItem = async ({
+  productId,
+  cartId,
+  amount,
+}: {
+  productId: string;
+  cartId: string;
+  amount: number;
+}) => {
+  let cartItem = await db.cartItem.findFirst({
+    where: {
+      productId,
+      cartId,
+    },
+  });
+  if (cartItem) {
+    cartItem = await db.cartItem.update({
+      where: {
+        id: cartItem.id,
+      },
+      data: {
+        amount,
+      },
+    });
+  } else {
+    cartItem = await db.cartItem.create({
+      data: { productId, cartId, amount },
+    });
+  }
+};
+
+const updateCart = async (cart: Cart) => {
+  const cartItems = await db.cartItem.findMany({
+    where: {
+      cartId: cart.id,
+    },
+    include: {
+      product: true,
+    },
+  });
+  let numItem = 0;
+  let cartTotal = 0;
+  for (const item of cartItems) {
+    numItem += item.amount;
+    cartTotal = item.amount * item.product.price;
+  }
+  const tax = cart.taxRate * cartTotal;
+  const shipping = cartTotal === 0 ? cart.shipping : 0;
+  const orderTotal = cartTotal + tax + shipping;
+
+  await db.cart.update({
+    where: {
+      id: cart.id,
+    },
+    data: {
+      numItemsInCart: numItem,
+      cartTotal,
+      tax,
+      orderTotal,
+    },
+  });
+};
 
 export const addToCart = async (prevState: { message: string }, formData: FormData) => {
-  // const user = await getUser();
+  const user = await getUser();
   try {
     const productId = formData.get('id') as string;
-    // const amount = Number(formData.get('amount'));
+    const amount = Number(formData.get('amount'));
     await findExistingProduct(productId);
-    // const cart = await fetchOrCreateCart({ userId: user.id });
+    const cart = await fetchOrCreateCart({ userId: user.id });
+    await updateOrCreateCartItem({ productId, cartId: cart.id, amount });
+    await updateCart(cart);
   } catch (error) {
     catchError(error);
   }
