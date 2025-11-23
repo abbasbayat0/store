@@ -367,7 +367,7 @@ const findExistingProduct = async (productId: string) => {
   return product;
 };
 
-const fetchOrCreateCart = async ({
+export const fetchOrCreateCart = async ({
   userId,
   error = false,
 }: {
@@ -436,7 +436,7 @@ const updateOrCreateCartItem = async ({
   }
 };
 
-const updateCart = async (cart: Cart) => {
+export const updateCart = async (cart: Cart) => {
   const cartItems = await db.cartItem.findMany({
     where: {
       cartId: cart.id,
@@ -445,10 +445,10 @@ const updateCart = async (cart: Cart) => {
       product: true,
     },
   });
-  let numItem = 0;
+  let numItemsInCart = 0;
   let cartTotal = 0;
   for (const item of cartItems) {
-    numItem += item.amount;
+    numItemsInCart += item.amount;
     cartTotal = item.amount * item.product.price;
   }
   const tax = cart.taxRate * cartTotal;
@@ -460,7 +460,7 @@ const updateCart = async (cart: Cart) => {
       id: cart.id,
     },
     data: {
-      numItemsInCart: numItem,
+      numItemsInCart,
       cartTotal,
       tax,
       orderTotal,
