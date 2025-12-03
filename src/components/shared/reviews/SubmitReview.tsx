@@ -63,7 +63,7 @@ const SubmitReview = ({ productId }: { productId: string }) => {
           {pending ? (
             <div className='flex items-center justify-center gap-1'>
               <GrRefresh className='animate-spin' />
-              <p>Creating...</p>
+              <p>Adding...</p>
             </div>
           ) : (
             <p>Add</p>
