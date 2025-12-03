@@ -5,8 +5,6 @@ type CartWithProduct = Prisma.CartItemGetPayload<{
 }>;
 
 const CartItemsList = ({ cartItems }: { cartItems: CartWithProduct[] }) => {
-  console.log('the cart Items is ', cartItems);
-
   return <div className='h-52 w-2/3 bg-green-500 p-5'></div>;
 };
 
