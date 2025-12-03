@@ -10,14 +10,14 @@ const page = async () => {
   const { userId } = await auth();
   if (!userId) redirect('/');
   const cart = await fetchOrCreateCart({ userId });
-  await updateCart(cart);
-  if (cart.numItemsInCart !== 0) return <EmptyList text='There Is No Product In Your Cart !' />;
+  const { currentCart, cartItems } = await updateCart(cart);
+  if (cart.numItemsInCart === 0) return <EmptyList text='There Is No Product In Your Cart !' />;
   return (
     <>
       <SectionTitle title='Shipping Cart' />
       <div className='flex items-center justify-between'>
-        <CartItemsList />
-        <CartTotals cart={cart} />
+        <CartItemsList cartItems={cartItems} />
+        <CartTotals cart={currentCart} />
       </div>
     </>
   );
