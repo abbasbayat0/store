@@ -5,7 +5,7 @@ const CartTotals = ({ cart }: { cart: Cart }) => {
   const { cartTotal, shipping, tax, orderTotal } = cart;
   return (
     <div className='flex w-1/3 flex-col p-5'>
-      <div className='w-full rounded-lg border border-gray-300 p-8 shadow-md'>
+      <div className='w-full rounded-lg border border-gray-300 p-8 shadow-md transition duration-300 dark:border-gray-800'>
         <Rows title='subtotal' amount={cartTotal} />
         <Rows title='shipping' amount={shipping} />
         <Rows title='tax' amount={tax} />
@@ -34,10 +34,16 @@ const Rows = ({
 }) => {
   return (
     <div
-      className={`flex items-center justify-between ${last ? 'mt-8' : 'mt-3 border-b border-b-gray-300'}`}
+      className={`flex items-center justify-between ${last ? 'mt-8' : 'mt-3 border-b border-b-gray-300 transition duration-300 dark:border-b-gray-800'}`}
     >
-      <p className={`text-sm capitalize ${last ? 'font-bold' : ''}`}>{title}</p>
-      <p className={`text-sm ${last ? 'font-bold' : ''}`}>{formatCurrency(amount)}</p>
+      <p
+        className={`text-sm capitalize transition duration-300 dark:text-white ${last ? 'font-bold' : ''}`}
+      >
+        {title}
+      </p>
+      <p className={`text-sm transition duration-300 dark:text-white ${last ? 'font-bold' : ''}`}>
+        {formatCurrency(amount)}
+      </p>
     </div>
   );
 };

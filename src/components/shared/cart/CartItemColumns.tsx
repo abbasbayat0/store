@@ -27,13 +27,19 @@ export const SecondColumn = ({
   return (
     <div className='sm:w-48'>
       <Link href={`/products/${productId}`}>
-        <h3 className='font-bold capitalize hover:underline'>{name}</h3>
+        <h3 className='font-bold capitalize transition duration-300 hover:underline dark:text-white'>
+          {name}
+        </h3>
       </Link>
-      <h4 className='mt-2 text-xs capitalize'>{company}</h4>
+      <h4 className='mt-2 text-xs capitalize transition duration-300 dark:text-white'>{company}</h4>
     </div>
   );
 };
 
 export const FourthColumn = ({ price }: { price: number }) => {
-  return <p className='font-bold md:ml-auto'>{formatCurrency(price)}</p>;
+  return (
+    <p className='font-bold transition duration-300 md:ml-auto dark:text-white'>
+      {formatCurrency(price)}
+    </p>
+  );
 };

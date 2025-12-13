@@ -14,12 +14,12 @@ const CartItemsList = ({ cartItems }: { cartItems: CartWithProduct[] }) => {
         const { id: productId, image, name, company, price } = cartItem.product;
         return (
           <div
-            className='flex gap-5 rounded-lg border border-gray-200 px-5 py-8 shadow-md'
+            className='flex gap-5 rounded-lg border border-gray-200 px-5 py-8 shadow-md transition duration-300 dark:border-gray-800'
             key={cartItem.cartId}
           >
             <FirstColumn image={image} name={name} />
             <SecondColumn name={name} company={company} productId={productId} />
-            <ThirdColumn />
+            <ThirdColumn id={id} amount={amount} />
             <FourthColumn price={price} />
           </div>
         );
