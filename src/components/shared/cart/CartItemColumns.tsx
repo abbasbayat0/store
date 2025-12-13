@@ -27,7 +27,7 @@ export const SecondColumn = ({
   return (
     <div className='sm:w-48'>
       <Link href={`/products/${productId}`}>
-        <h3 className='font-medium capitalize hover:underline'>{name}</h3>
+        <h3 className='font-bold capitalize hover:underline'>{name}</h3>
       </Link>
       <h4 className='mt-2 text-xs capitalize'>{company}</h4>
     </div>
@@ -35,5 +35,5 @@ export const SecondColumn = ({
 };
 
 export const FourthColumn = ({ price }: { price: number }) => {
-  return <p className='font-medium md:ml-auto'>{formatCurrency(price)}</p>;
+  return <p className='font-bold md:ml-auto'>{formatCurrency(price)}</p>;
 };
