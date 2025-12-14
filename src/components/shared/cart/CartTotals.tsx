@@ -4,7 +4,7 @@ import { Cart } from '@prisma/client';
 const CartTotals = ({ cart }: { cart: Cart }) => {
   const { cartTotal, shipping, tax, orderTotal } = cart;
   return (
-    <div className='flex w-1/3 flex-col p-5'>
+    <div className='flex w-full  sm:w-3/4 lg:w-1/3 flex-col p-5'>
       <div className='w-full rounded-lg border border-gray-300 p-8 shadow-md transition duration-300 dark:border-gray-800'>
         <Rows title='subtotal' amount={cartTotal} />
         <Rows title='shipping' amount={shipping} />

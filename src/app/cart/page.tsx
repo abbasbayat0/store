@@ -15,7 +15,7 @@ const page = async () => {
   return (
     <>
       <SectionTitle title='Shipping Cart' />
-      <div className='flex items-center justify-between'>
+      <div className='flex flex-col lg:flex-row items-center justify-between'>
         <CartItemsList cartItems={cartItems} />
         <CartTotals cart={currentCart} />
       </div>

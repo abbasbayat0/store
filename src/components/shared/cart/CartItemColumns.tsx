@@ -3,12 +3,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 export const FirstColumn = ({ name, image }: { image: string; name: string }) => {
   return (
-    <div className='relative h-24 w-24 sm:h-32 sm:w-32'>
+    <div className='relative min-w-32 h-20 min-[400px]:h-44 md:w-44 lg:w-32 lg:h-32'>
       <Image
         src={image}
         alt={name}
         fill
-        sizes='(max-width:768px) 100vw,(max-width:1200px) 50vw,33vw'
         priority
         className='w-full rounded-md object-cover'
       />
