@@ -34,22 +34,22 @@ const Notif = () => {
             ✕
           </button>
 
-          <h1 className='text-2xl font-bold text-white'>بیشتر کشف کنید!</h1>
+          <h1 className='text-2xl font-bold text-white'>! این همه ی داستان نیست</h1>
           <p className='leading-relaxed text-gray-200'>
             این وب‌سایت دارای صفحات و ویژگی‌های اختصاصی از جمله پنل مدیریت است. 
-            برای دسترسی به تمام امکانات، وارد شوید.
+            برای دسترسی به تمام امکانات، وارد شوید
           </p>
           <div className='space-y-3'>
-            <p className='text-sm text-gray-300'>با مشخصات آزمایشی امتحان کنید:</p>
+            <p className='text-sm text-gray-300'>ورود کاربر بصورت امتحانی</p>
             <div className='space-y-2 rounded-lg bg-gray-800/50 p-3'>
               <div className='flex items-center gap-2'>
-                <span className='text-xs text-gray-400'>ایمیل:</span>
+                <span className='text-xs text-gray-400'>E-mail:</span>
                 <code className='rounded bg-gray-700 px-2 py-1 font-mono text-sm text-white'>
                   test@test.com
                 </code>
               </div>
               <div className='flex items-center gap-2'>
-                <span className='text-xs text-gray-400'>رمز عبور:</span>
+                <span className='text-xs text-gray-400'>Password:</span>
                 <code className='rounded bg-gray-700 px-2 py-1 font-mono text-sm text-white'>
                   testUser@
                 </code>
@@ -57,7 +57,7 @@ const Notif = () => {
             </div>
           </div>
           <div className='pt-2'>
-            <p className='mb-2 text-sm text-gray-300'>یا فایل راهنمای پروژه را مطالعه کنید:</p>
+            <p className='mb-2 text-sm text-gray-300'>: همچنین می توانید مستندات پروژه را در لینک زیر مطالعه کنید</p>
             <a
               href='https://github.com/abbasbayat0/store/blob/master/README.md'
               className='text-blue-400 underline transition-colors duration-200 hover:text-blue-300'
