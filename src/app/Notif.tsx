@@ -57,7 +57,7 @@ const Notif = () => {
             </div>
           </div>
           <div className='pt-2'>
-            <p className='mb-2 text-sm text-gray-300'>: همچنین می توانید مستندات پروژه را در لینک زیر مطالعه کنید</p>
+            <p className='mb-2 text-sm text-gray-300'>: مستندات پروژه</p>
             <a
               href='https://github.com/abbasbayat0/store/blob/master/README.md'
               className='text-blue-400 underline transition-colors duration-200 hover:text-blue-300'
